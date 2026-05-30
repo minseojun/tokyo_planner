@@ -24,7 +24,7 @@
   --sidebar-w:400px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);overflow:hidden}html{overflow:hidden}
+html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
 
 /* ── LAYOUT ── */
 .app{display:flex;flex-direction:column;height:100vh;height:100dvh}
@@ -144,8 +144,8 @@ html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg)
   border-top:2px solid transparent;transition:all .15s;max-width:80px}
 .mpt.on{color:var(--accent);border-top-color:var(--accent)}
 .mpt-icon{font-size:18px;line-height:1}
-.mobile-list-panel{display:none;flex-direction:column;overflow-y:auto;overflow-x:hidden;flex:1;-webkit-overflow-scrolling:touch}
-.mobile-list-panel.active{display:flex;overflow-y:auto}
+.mobile-list-panel{display:none;flex-direction:column;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.mobile-list-panel.active{display:flex}
 .mobile-map-panel{display:none;flex:1;overflow:hidden}
 .mobile-map-panel.active{display:flex;flex-direction:column}
 
@@ -207,14 +207,15 @@ html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg)
 /* ── RESPONSIVE ── */
 @media(max-width:700px){
   .sidebar,.resize-handle{display:none !important}
-  .main{flex-direction:column;overflow:hidden}
-  .map-wrap{flex:none;height:50vw;min-height:200px;max-height:300px}
+  .main{flex-direction:column;flex:1;min-height:0;overflow:visible}
+  .map-wrap{flex:none;height:45vw;min-height:180px;max-height:280px}
   .mobile-panel-tabs{display:block}
-  .mobile-list-panel{display:flex;flex:1;overflow-y:auto !important;-webkit-overflow-scrolling:touch}
+  .mobile-list-panel{display:flex;flex:1;min-height:0;overflow-y:scroll !important;-webkit-overflow-scrolling:touch}
+  .mobile-list-panel.active{display:flex}
   .map-legend{display:none}
   .place-actions{opacity:1 !important}
   .popup{border-radius:16px 16px 0 0}
-  .app{overflow:hidden}
+  .split-cols{grid-template-columns:1fr}
 }
 @media(min-width:701px){
   .mobile-list-panel,.mobile-panel-tabs{display:none !important}
@@ -292,9 +293,7 @@ html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg)
       <button class="mpt" id="mptMap" onclick="switchMobileTab('map')">
         <span class="mpt-icon">🗺️</span>지도
       </button>
-      <button class="mpt" id="mptMemo" onclick="switchMobileTab('memo')">
-        <span class="mpt-icon">📝</span>메모
-      </button>
+
     </div>
   </div>
 </div>
@@ -643,7 +642,7 @@ function makeCard(p,num,color,compact=false){
       <button class="pa edit-btn" onclick="event.stopPropagation();openEdit(${p.id})">✎</button>
       <button class="pa" onclick="event.stopPropagation();deletePlace(${p.id})">✕</button>
     </div>`;
-  card.onclick=()=>{if(p.lat&&p.lng){map.setView([p.lat,p.lng],16,{animate:true});markers[p.id]?.openPopup();}highlightCard(p.id);if(window.innerWidth<=700)switchMobileTab('map');};
+  card.onclick=()=>{if(p.lat&&p.lng){map.setView([p.lat,p.lng],16,{animate:true});markers[p.id]?.openPopup();}highlightCard(p.id);if(window.innerWidth<=700){switchMobileTab('map')};};
   return card;
 }
 
@@ -669,12 +668,10 @@ function switchMobileTab(tab){
   mobileTab=tab;
   document.getElementById('mptList').classList.toggle('on',tab==='list');
   document.getElementById('mptMap').classList.toggle('on',tab==='map');
-  document.getElementById('mptMemo').classList.toggle('on',tab==='memo');
   const ml=document.getElementById('mobileList');
   const mw=document.getElementById('mapWrap');
   if(tab==='list'){ml.style.display='flex';mw.style.display='none';}
   else if(tab==='map'){ml.style.display='none';mw.style.display='block';setTimeout(()=>map.invalidateSize(),50);}
-  else if(tab==='memo'){ml.style.display='flex';mw.style.display='none';memoVisible=true;renderAll();}
 }
 
 // ── MEMO ───────────────────────────────────────────────────────
