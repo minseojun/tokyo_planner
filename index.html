@@ -230,6 +230,7 @@ html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg)
     <div class="sync-badge">
       <div class="sync-dot" id="syncDot"></div>
       <span id="syncText">연결 중...</span>
+      <button onclick="resetData()" style="margin-left:6px;padding:2px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface2);color:var(--text3);font-size:10px;font-family:DM Mono,monospace;cursor:pointer" title="데이터를 기본값으로 초기화">초기화</button>
     </div>
   </div>
 
@@ -379,28 +380,52 @@ const DEFAULT_PLACES = [
   {id:3,day:0,time:'17:30',name:'신오쿠보 코리아타운',cat:'shop',who:'both',lat:35.7010,lng:139.7007,memo:'한국 화장품·스트리트 푸드 · 현지 20대 핫플',transit:{mode:'subway',min:'25분',note:'오에도선'}},
   {id:4,day:0,time:'19:00',name:'츠키시마 몬자야끼',cat:'food',who:'both',lat:35.6643,lng:139.7825,memo:'도쿄 명물 · 현금 챙기기',transit:{mode:'subway',min:'25분',note:'오에도선→신주쿠'}},
   {id:5,day:0,time:'20:30',name:'가부키초 골든가이',cat:'tour',who:'both',lat:35.6953,lng:139.7008,memo:'도쿄 골목 바 문화 · 구경만 해도 재밌음',transit:null},
-  // DAY 2 공통
-  {id:6,day:1,time:'00:00',name:'그레이스리 호텔 (출발)',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,memo:'오늘의 시작점',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
-  {id:7,day:1,time:'09:30',name:'시부야 브런치 카페',cat:'cafe',who:'both',lat:35.6612,lng:139.7035,memo:'로그로드 시부야 or 사루가쿠초 카페 골목',transit:null},
-  {id:16,day:1,time:'13:30',name:'긴자 카가리 닭라멘',cat:'food',who:'both',lat:35.6712,lng:139.7613,memo:'민서 합류 · 크리미한 닭 파이탄 · 오픈런 or 14시 이후',transit:{mode:'walk',min:'8분',note:'도보'}},
-  {id:17,day:1,time:'15:00',name:'도쿄역 캐릭터스트리트',cat:'shop',who:'both',lat:35.6812,lng:139.7671,memo:'B1F · 10:00-20:30 · 긴자에서 도보 8분',transit:null},
-  // DAY 2 민서
-  {id:8,day:1,time:'10:00',name:'BOX카페 스타워즈',cat:'cafe',who:'minseo',lat:35.6594,lng:139.6989,memo:'SHIBUYA109 B2F · 오픈런 추천',transit:{mode:'walk',min:'3분',note:'도보'}},
-  {id:9,day:1,time:'11:30',name:'디즈니스토어 시부야',cat:'shop',who:'minseo',lat:35.6613,lng:139.7002,memo:'3층 구조 · 일본한정 굿즈',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:10,day:1,time:'12:15',name:'시부야 스크램블·미야시타파크',cat:'tour',who:'minseo',lat:35.6614,lng:139.7024,memo:'스크램블 구경 + 미야시타파크 루프탑',transit:{mode:'subway',min:'20분',note:'긴자선'}},
-  // DAY 2 한비
-  {id:11,day:1,time:'10:00',name:'시부야 로그로드·사루가쿠초',cat:'tour',who:'hanbi',lat:35.6499,lng:139.7032,memo:'시부야 강변 로컬 골목 · 카페·빈티지 밀집',transit:{mode:'subway',min:'20분',note:'히비야선'}},
-  {id:12,day:1,time:'12:00',name:'팀랩 보더리스',cat:'tour',who:'hanbi',lat:35.6621,lng:139.7433,memo:'아자부다이 힐스 B1F · 가미야초역 도보 5분 · 사전예약 필수',transit:{mode:'walk',min:'10분',note:'도보'}},
-  {id:13,day:1,time:'14:30',name:'롯폰기힐스·모리 가든',cat:'tour',who:'hanbi',lat:35.6604,lng:139.7292,memo:'모리타워 주변 산책 · 도쿄타워 뷰',transit:{mode:'subway',min:'20분',note:'도에이오에도선'}},
-  {id:14,day:1,time:'18:30',name:'공연 관람',cat:'show',who:'hanbi',lat:35.7056,lng:139.7520,memo:'18:30~21:00',transit:{mode:'subway',min:'25분',note:'유리카모메'}},
-  {id:15,day:1,time:'21:30',name:'오다이바 야경',cat:'tour',who:'hanbi',lat:35.6197,lng:139.7757,memo:'공연 후 야경 · 무지개다리 · 다이버시티',transit:null},
+  // ── DAY 2 · 공연의 날 ──────────────────────────────────────
+  // 오전: 마루노우치 카페 → 캐릭터스트리트 (도쿄역 권역)
+  // 점심: 긴자 카가리 (도보 8분)
+  // 오후: 긴자 산책 (이토야·긴자 식스)
+  // 이른 저녁: 유라쿠초 가드시타 (같이)
+  // 분기: 민서→시부야(스타워즈·디즈니·타워레코즈) / 한비→공연장
+  // 21시: 합류 뒤풀이
+
+  // ── 공통 오전~저녁 ──
+  {id:6,day:1,time:'00:00',name:'그레이스리 호텔 (출발)',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,
+   memo:'오늘의 시작점',transit:{mode:'subway',min:'15분',note:'JR 중앙선'}},
+  {id:7,day:1,time:'09:30',name:'마루노우치 카페',cat:'cafe',who:'both',lat:35.6823,lng:139.7656,
+   memo:'도쿄역 마루노우치 남쪽 카페 골목 · KITTE 1F 등',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:17,day:1,time:'10:30',name:'도쿄역 캐릭터스트리트',cat:'shop',who:'both',lat:35.6812,lng:139.7671,
+   memo:'B1F · 10:00-20:30 · 카페에서 도보 5분',transit:{mode:'walk',min:'8분',note:'도보'}},
+  {id:16,day:1,time:'12:00',name:'긴자 카가리 닭라멘',cat:'food',who:'both',lat:35.6712,lng:139.7613,
+   memo:'크리미한 닭 파이탄 · 줄 있으면 14시대가 짧음',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:40,day:1,time:'13:30',name:'긴자 이토야 · 긴자 식스',cat:'shop',who:'both',lat:35.6713,lng:139.7640,
+   memo:'이토야 문구 본점 12층 · 긴자식스 옥상정원 무료 · 현지인 쇼핑',transit:{mode:'walk',min:'8분',note:'도보'}},
+  {id:41,day:1,time:'16:00',name:'유라쿠초 가드시타 이른 저녁',cat:'food',who:'both',lat:35.6735,lng:139.7612,
+   memo:'JR 고가 밑 이자카야 골목 · 현지 직장인 성지 · 야끼토리·맥주',transit:null},
+
+  // ── 민서: 시부야 저녁 ──
+  {id:8,day:1,time:'17:30',name:'BOX카페 스타워즈',cat:'cafe',who:'minseo',lat:35.6594,lng:139.6989,
+   memo:'SHIBUYA109 B2F · 유라쿠초→시부야 긴자선 15분',transit:{mode:'walk',min:'3분',note:'도보'}},
+  {id:9,day:1,time:'18:30',name:'디즈니스토어 시부야',cat:'shop',who:'minseo',lat:35.6613,lng:139.7002,
+   memo:'3층 구조 · 일본한정 굿즈',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:42,day:1,time:'19:15',name:'타워레코즈 시부야',cat:'shop',who:'minseo',lat:35.6610,lng:139.6988,
+   memo:'7층 세계 최대 규모 · LP·한정판·J-POP',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:10,day:1,time:'20:00',name:'시부야 산책',cat:'tour',who:'minseo',lat:35.6614,lng:139.7024,
+   memo:'미야시타파크 루프탑 · 스크램블 야경 · 합류 전 자유시간',transit:null},
+
+  // ── 한비: 공연 ──
+  {id:14,day:1,time:'18:30',name:'공연 관람',cat:'show',who:'hanbi',lat:35.7056,lng:139.7520,
+   memo:'18:30~21:00 · 유라쿠초에서 이동',transit:null},
+
+  // ── 합류 ──
+  {id:43,day:1,time:'21:00',name:'뒤풀이 (장소 미정)',cat:'food',who:'both',lat:35.6930,lng:139.7010,
+   memo:'공연 끝나고 합류! 신주쿠 or 시부야 이자카야 · 장소 정해지면 수정',transit:null},
   // DAY 3
   {id:18,day:2,time:'00:00',name:'그레이스리 호텔 (출발)',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,memo:'오늘의 시작점',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
-  {id:19,day:2,time:'12:00',name:'Sushi Issei (스시 잇세이)',cat:'food',who:'both',lat:35.6671,lng:139.7136,memo:'오모테산도역 도보 2분 · 점심 런치 세트 · 화요~일 11:30 오픈',transit:{mode:'walk',min:'8분',note:'도보'}},
-  {id:20,day:2,time:'11:30',name:'Hysteric Glamour',cat:'shop',who:'both',lat:35.6652,lng:139.7026,memo:'진구마에 6초메 · 록/빈티지 무드 일본 대표 브랜드',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:21,day:2,time:'12:30',name:'우라하라주쿠 골목 쇼핑',cat:'shop',who:'both',lat:35.6697,lng:139.7074,memo:'BAPE · Stussy · Beams · WTaps · 골목 보물찾기',transit:{mode:'walk',min:'8분',note:'도보'}},
+  {id:19,day:2,time:'12:30',name:'Sushi Issei (스시 잇세이)',cat:'food',who:'both',lat:35.6671,lng:139.7136,memo:'오모테산도역 도보 2분 · 점심 런치 세트 · 화요~일 11:30 오픈',transit:{mode:'walk',min:'8분',note:'도보'}},
+  {id:20,day:2,time:'10:00',name:'Hysteric Glamour',cat:'shop',who:'both',lat:35.6652,lng:139.7026,memo:'진구마에 6초메 · 록/빈티지 무드 일본 대표 브랜드',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:21,day:2,time:'11:00',name:'우라하라주쿠 골목 쇼핑',cat:'shop',who:'both',lat:35.6697,lng:139.7074,memo:'BAPE · Stussy · Beams · WTaps · 골목 보물찾기',transit:{mode:'walk',min:'8분',note:'도보'}},
   {id:22,day:2,time:'14:00',name:'Visvim (GYRE 2F)',cat:'shop',who:'both',lat:35.6674,lng:139.7068,memo:'오모테산도 GYRE 빌딩 2F · 일본 핸드크래프트 하이엔드',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:23,day:2,time:'14:45',name:'명곡킷사 라이온',cat:'cafe',who:'both',lat:35.6593,lng:139.6964,memo:'1927년 오픈 정통 킷사텐 · 클래식 음악 · 말 금지 조용한 공간 · 시부야 도겐자카',transit:{mode:'walk',min:'7분',note:'도보'}},
+  {id:23,day:2,time:'15:30',name:'명곡킷사 라이온',cat:'cafe',who:'both',lat:35.6593,lng:139.6964,memo:'1927년 오픈 정통 킷사텐 · 클래식 음악 · 말 금지 조용한 공간 · 시부야 도겐자카',transit:{mode:'walk',min:'7분',note:'도보'}},
   {id:24,day:2,time:'16:00',name:'COMME des GARCONS 아오야마',cat:'shop',who:'both',lat:35.6642,lng:139.7137,memo:'미나미아오야마 · 플래그십 · 건물 자체가 작품',transit:{mode:'walk',min:'3분',note:'도보'}},
   {id:25,day:2,time:'16:45',name:'BAO BAO Issey Miyake 아오야마',cat:'shop',who:'both',lat:35.6645,lng:139.7139,memo:'꼼데 바로 옆 · 바오바오 백 일본 직구 찬스',transit:{mode:'subway',min:'15분',note:'긴자선'}},
   {id:26,day:2,time:'18:30',name:'삿포로 수프카레 도미니카',cat:'food',who:'both',lat:35.6905,lng:139.7044,memo:'신주쿠 3초메 B1F · 호텔 도보 5분',transit:{mode:'walk',min:'10분',note:'도보'}},
@@ -826,6 +851,17 @@ document.addEventListener('click', e => {
   const wrap = document.getElementById('mapSearchWrap');
   if(wrap && !wrap.contains(e.target)) document.getElementById('searchResults').classList.remove('show');
 });
+
+// ── RESET DATA ────────────────────────────────────────────────
+function resetData(){
+  if(!confirm('일정을 기본값으로 초기화할까요? 수정한 내용이 모두 사라집니다.')) return;
+  places = JSON.parse(JSON.stringify(DEFAULT_PLACES));
+  memos = {};
+  activeDay = 0;
+  saveToFirebase();
+  renderAll();
+  setTimeout(fitAll, 300);
+}
 
 // ── RESIZE (desktop only) ─────────────────────────────────────
 (function(){
