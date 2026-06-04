@@ -379,6 +379,7 @@ const DEFAULT_PLACES = [
   {id:2,day:0,time:'15:00',name:'신주쿠 교엔',cat:'tour',who:'both',lat:35.6852,lng:139.7100,memo:'17:30 마감 · 계절 따라 분위기 완전 다름',transit:{mode:'subway',min:'5분',note:'야마노테선'}},
   {id:3,day:0,time:'16:30',name:'메이지진구 · 요요기 공원',cat:'tour',who:'both',lat:35.6764,lng:139.6993,memo:'울창한 숲 속 신사 · 요요기 공원 피크닉 분위기 · 모헤지까지 도보 15분',transit:{mode:'walk',min:'15분',note:'도보'}},
   {id:4,day:0,time:'19:00',name:'모헤지 시부야 스크램블스퀘어',cat:'food',who:'both',lat:35.6583,lng:139.7022,memo:'몬자야끼 · 12F · 평점 4.8 · 11시 오픈 · 줄 있을 수 있음',transit:{mode:'subway',min:'5분',note:'야마노테선→신주쿠'}},
+  {id:46,day:0,time:'19:30',name:'디즈니 플래그십 도쿄',cat:'shop',who:'both',lat:35.6930,lng:139.7006,memo:'신주쿠 기노쿠니야 옆 · 상설 · 아젤란즈 토트백 · 호텔 도보 5분',transit:{mode:'walk',min:'5분',note:'도보'}},
   {id:5,day:0,time:'20:30',name:'가부키초 골든가이',cat:'tour',who:'both',lat:35.6953,lng:139.7008,memo:'도쿄 골목 바 문화 · 구경만 해도 재밌음',transit:null},
   // ── DAY 2 · 공연의 날 ──────────────────────────────────────
   // 오전: 마루노우치 카페 → 캐릭터스트리트 (도쿄역 권역)
@@ -391,10 +392,10 @@ const DEFAULT_PLACES = [
   // ── 공통 오전~저녁 ──
   {id:6,day:1,time:'00:00',name:'그레이스리 호텔 (출발)',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,
    memo:'오늘의 시작점',transit:{mode:'subway',min:'15분',note:'JR 중앙선'}},
-  {id:7,day:1,time:'09:30',name:'마루노우치 카페',cat:'cafe',who:'both',lat:35.6823,lng:139.7656,
-   memo:'도쿄역 마루노우치 남쪽 카페 골목 · KITTE 1F 등',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:17,day:1,time:'10:30',name:'도쿄역 캐릭터스트리트',cat:'shop',who:'both',lat:35.6812,lng:139.7671,
-   memo:'B1F · 10:00-20:30 · 카페에서 도보 5분',transit:{mode:'walk',min:'8분',note:'도보'}},
+  {id:7,day:1,time:'09:30',name:'솔라마치 스타워즈 팝업',cat:'shop',who:'both',lat:35.7101,lng:139.8107,
+   memo:'스카이트리 4F 이스트야드 12번지 · 8월 2일까지 · 소물·잡화 위주',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:47,day:1,time:'10:30',name:'도쿄 스카이트리 외관 산책',cat:'tour',who:'both',lat:35.7101,lng:139.8107,
+   memo:'들어온 김에 외관·주변 산책 · 전망대는 선택',transit:{mode:'subway',min:'15분',note:'아사쿠사선→마루노우치선'}},
   {id:16,day:1,time:'12:00',name:'긴자 카가리 닭라멘',cat:'food',who:'both',lat:35.6712,lng:139.7613,
    memo:'크리미한 닭 파이탄 · 줄 있으면 14시대가 짧음',transit:{mode:'walk',min:'5분',note:'도보'}},
   {id:40,day:1,time:'13:30',name:'긴자 이토야 · 긴자 식스',cat:'shop',who:'both',lat:35.6713,lng:139.7640,
@@ -403,14 +404,18 @@ const DEFAULT_PLACES = [
    memo:'JR 고가 밑 이자카야 골목 · 현지 직장인 성지 · 야끼토리·맥주',transit:null},
 
   // ── 민서: 시부야 저녁 ──
-  {id:8,day:1,time:'17:30',name:'BOX카페 스타워즈',cat:'cafe',who:'minseo',lat:35.6594,lng:139.6989,
-   memo:'SHIBUYA109 B2F · 유라쿠초→시부야 긴자선 15분',transit:{mode:'walk',min:'3분',note:'도보'}},
+  {id:48,day:1,time:'17:30',name:'시부야 TSUTAYA 스타워즈 팝업',cat:'shop',who:'minseo',lat:35.6596,lng:139.7005,
+   memo:'B1F · 7월 16일까지 · 화한 디자인 티셔츠 위주 · 유라쿠초→시부야 긴자선 15분',transit:{mode:'walk',min:'3분',note:'도보'}},
+  {id:8,day:1,time:'18:00',name:'BOX카페 스타워즈',cat:'cafe',who:'minseo',lat:35.6594,lng:139.6989,
+   memo:'SHIBUYA109 B2F · TSUTAYA에서 도보 3분',transit:{mode:'walk',min:'3분',note:'도보'}},
   {id:9,day:1,time:'18:30',name:'디즈니스토어 시부야',cat:'shop',who:'minseo',lat:35.6613,lng:139.7002,
    memo:'3층 구조 · 일본한정 굿즈',transit:{mode:'walk',min:'5분',note:'도보'}},
   {id:42,day:1,time:'19:15',name:'타워레코즈 시부야',cat:'shop',who:'minseo',lat:35.6610,lng:139.6988,
    memo:'7층 세계 최대 규모 · LP·한정판·J-POP',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:10,day:1,time:'20:00',name:'시부야 산책',cat:'tour',who:'minseo',lat:35.6614,lng:139.7024,
-   memo:'미야시타파크 루프탑 · 스크램블 야경 · 합류 전 자유시간',transit:null},
+  {id:10,day:1,time:'19:30',name:'시부야 스크램블 야경 산책',cat:'tour',who:'minseo',lat:35.6614,lng:139.7024,
+   memo:'스크램블 야경 · 미야시타파크 루프탑',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
+  {id:49,day:1,time:'20:15',name:'이케부쿠로 PARCO 스타워즈 팝업',cat:'shop',who:'minseo',lat:35.7295,lng:139.7109,
+   memo:'B2F · 8월 16일까지 · 솔라마치와 같은 운영사 · 소물·잡화 위주',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
 
   // ── 한비: 공연 ──
   {id:14,day:1,time:'18:30',name:'공연 관람',cat:'show',who:'hanbi',lat:35.7056,lng:139.7520,
