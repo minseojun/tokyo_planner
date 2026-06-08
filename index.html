@@ -17,112 +17,81 @@
   --border:#e0ddd7;--border2:#ccc9c2;
   --accent:#2a5cff;--accent-bg:#eef1ff;
   --text:#1a1917;--text2:#6b6860;--text3:#a8a69f;
-  --warn:#c96a0a;--warn-bg:#fff3e0;--red:#dc3535;
+  --warn:#c96a0a;--warn-bg:#fff3e0;--red:#dc3535;--green:#0e9f7e;--green-bg:#e6f7ee;
   --minseo:#2a5cff;--minseo-bg:#eef1ff;
   --hanbi:#e0407a;--hanbi-bg:#fff0f5;
   --d1:#3b7fff;--d2:#2ab87a;--d3:#e05a8a;--d4:#e09a2a;
-  --sidebar-w:400px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
-
-/* ── LAYOUT ── */
 .app{display:flex;flex-direction:column;height:100vh;height:100dvh}
-.topbar{display:flex;align-items:center;gap:10px;padding:0 16px;height:52px;flex-shrink:0;
-  background:var(--surface);border-bottom:1px solid var(--border);z-index:200}
+.topbar{display:flex;align-items:center;gap:10px;padding:0 16px;height:52px;flex-shrink:0;background:var(--surface);border-bottom:1px solid var(--border);z-index:200}
 .logo{display:flex;align-items:baseline;gap:5px;font-family:'Instrument Serif',serif;font-size:17px;color:var(--text);white-space:nowrap}
 .logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-bottom:2px;flex-shrink:0}
 .logo-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);margin-left:1px}
 .sync-badge{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;white-space:nowrap}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:#ccc;transition:background .3s}
-.sync-dot.live{background:#2ab87a}
-.sync-dot.saving{background:#e09a2a}
-
-/* day tabs — scrollable on mobile */
+.sync-dot.live{background:#2ab87a}.sync-dot.saving{background:#e09a2a}
+.reset-btn{margin-left:6px;padding:2px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface2);color:var(--text3);font-size:10px;font-family:'DM Mono',monospace;cursor:pointer}
 .day-tabs-wrap{flex-shrink:0;background:var(--surface);border-bottom:1px solid var(--border);padding:6px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .day-tabs-wrap::-webkit-scrollbar{display:none}
 .day-tabs{display:flex;gap:4px;width:max-content}
-.dtab{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;
-  color:var(--text2);border:1.5px solid var(--border);background:var(--surface2);
-  transition:all .15s;white-space:nowrap}
+.dtab{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;color:var(--text2);border:1.5px solid var(--border);background:var(--surface2);transition:all .15s;white-space:nowrap}
 .dtab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
-
-/* ── MAIN (desktop: sidebar+map, mobile: tabs) ── */
 .main{display:flex;flex:1;overflow:hidden;position:relative}
-
-/* SIDEBAR */
-.sidebar{width:var(--sidebar-w);min-width:200px;max-width:700px;
-  background:var(--surface);border-right:1px solid var(--border);
-  overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;flex-shrink:0}
+.sidebar{width:400px;min-width:200px;max-width:700px;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;flex-shrink:0}
 .sidebar::-webkit-scrollbar{width:3px}
 .sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
-
 .resize-handle{width:5px;cursor:col-resize;flex-shrink:0;background:transparent;position:relative;z-index:10;transition:background .15s}
 .resize-handle:hover,.resize-handle.dragging{background:var(--accent)}
 .resize-handle::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1px;height:40px;background:var(--border2);border-radius:1px}
-
-/* MAP */
 .map-wrap{flex:1;position:relative;overflow:hidden}
 #map{width:100%;height:100%}
 .map-overlay{position:absolute;top:10px;right:10px;z-index:1000;display:flex;flex-direction:column;gap:6px}
-.map-btn{width:34px;height:34px;border-radius:8px;background:var(--surface);border:1px solid var(--border);
-  color:var(--text2);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all .15s;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.map-btn{width:34px;height:34px;border-radius:8px;background:var(--surface);border:1px solid var(--border);color:var(--text2);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;box-shadow:0 1px 4px rgba(0,0,0,.1)}
 .map-btn:hover{border-color:var(--accent);color:var(--accent)}
-.map-legend{position:absolute;bottom:16px;left:10px;z-index:1000;background:var(--surface);
-  border:1px solid var(--border);border-radius:10px;padding:9px 11px;
-  display:flex;flex-direction:column;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:11px}
+.map-legend{position:absolute;bottom:16px;left:10px;z-index:1000;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:9px 11px;display:flex;flex-direction:column;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:11px}
 .ml-title{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1px}
 .ml-item{display:flex;align-items:center;gap:6px;color:var(--text2)}
 .ml-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .ml-sep{height:1px;background:var(--border);margin:3px 0}
-.ml-num{width:15px;height:15px;border-radius:50%;border:1.5px solid currentColor;font-size:9px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;flex-shrink:0}
-
-/* transit label */
-.transit-label{background:rgba(255,255,255,.96);border:1px solid #ddd;border-radius:20px;
-  padding:2px 8px;font-size:10px;font-family:'Noto Sans KR',sans-serif;font-weight:500;
-  white-space:nowrap;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.1);line-height:1.4;
-  display:flex;align-items:center;gap:3px}
-
-/* ── SIDEBAR CONTENT ── */
-.section-hd{padding:12px 14px 8px;display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;background:var(--surface);z-index:5;border-bottom:1px solid var(--border)}
+.ml-num{width:15px;height:15px;border-radius:50%;border:1.5px solid currentColor;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;flex-shrink:0}
+.transit-label{background:rgba(255,255,255,.96);border:1px solid #ddd;border-radius:20px;padding:2px 8px;font-size:10px;font-family:'Noto Sans KR',sans-serif;font-weight:500;white-space:nowrap;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.1);line-height:1.4;display:flex;align-items:center;gap:3px}
+.section-hd{padding:12px 14px 8px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--surface);z-index:5;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:6px}
 .section-title{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
 .hd-right{display:flex;gap:6px;align-items:center}
-.add-btn{width:26px;height:26px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);
-  color:var(--text2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.add-btn{width:26px;height:26px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .add-btn:hover,.add-btn:active{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
-.memo-toggle{padding:3px 8px;border-radius:5px;font-size:10px;font-weight:600;font-family:'DM Mono',monospace;
-  cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text2);transition:all .15s}
-.memo-toggle.on{background:var(--warn-bg);border-color:var(--warn);color:var(--warn)}
+.tool-toggle{padding:3px 8px;border-radius:5px;font-size:10px;font-weight:600;font-family:'DM Mono',monospace;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text2);transition:all .15s}
+.tool-toggle.memo.on{background:var(--warn-bg);border-color:var(--warn);color:var(--warn)}
+.tool-toggle.drag.on{background:var(--green-bg);border-color:var(--green);color:var(--green)}
 .memo-panel{margin:0 10px 8px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);overflow:hidden;display:none}
 .memo-panel.show{display:block}
 .memo-panel-hd{padding:7px 11px;font-size:11px;font-weight:600;color:var(--text2);border-bottom:1px solid var(--border);background:var(--surface)}
-.memo-textarea{width:100%;padding:9px 11px;border:none;outline:none;resize:vertical;min-height:80px;
-  font-family:'Noto Sans KR',sans-serif;font-size:12px;color:var(--text);background:var(--surface2);line-height:1.7}
+.memo-textarea{width:100%;padding:9px 11px;border:none;outline:none;resize:vertical;min-height:80px;font-family:'Noto Sans KR',sans-serif;font-size:12px;color:var(--text);background:var(--surface2);line-height:1.7}
 .memo-textarea::placeholder{color:var(--text3)}
 .memo-save-row{padding:5px 10px;display:flex;justify-content:flex-end;align-items:center;gap:8px;border-top:1px solid var(--border);background:var(--surface)}
 .memo-save-btn{padding:4px 12px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:600;font-family:'Noto Sans KR',sans-serif;cursor:pointer}
 .memo-saved{font-size:10px;color:var(--text3);opacity:0;transition:opacity .3s}
 .memo-saved.show{opacity:1}
-
+.drag-hint{margin:0 10px 8px;padding:8px 11px;background:var(--green-bg);border:1px solid var(--green);border-radius:8px;font-size:11px;color:var(--green);line-height:1.5;display:none}
+.drag-hint.show{display:block}
 .split-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:8px 14px 4px}
 .split-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 10px;margin-bottom:6px}
 .split-col{border:1px solid var(--border);border-radius:10px;padding:8px;background:var(--surface2)}
 .split-col-hd{font-size:11px;font-weight:700;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)}
 .split-col-hd.minseo{color:var(--minseo)}.split-col-hd.hanbi{color:var(--hanbi)}
-
 .places-list{padding:6px 10px 4px;display:flex;flex-direction:column;gap:3px}
-.place-card{padding:8px 9px;border-radius:9px;background:var(--surface);border:1px solid var(--border);
-  cursor:pointer;transition:all .15s;display:flex;align-items:flex-start;gap:8px}
+.place-card{padding:8px 9px;border-radius:9px;background:var(--surface);border:1px solid var(--border);cursor:pointer;transition:background .15s,border-color .15s;display:flex;align-items:flex-start;gap:8px}
 .place-card:active{background:var(--surface2)}
 .place-card.active{border-color:var(--accent);background:var(--accent-bg)}
-.transit-row{display:flex;align-items:center;gap:4px;margin:3px 0 1px;padding:2px 6px;
-  background:var(--surface3);border-radius:6px;font-size:11px;color:var(--text2)}
+.place-card.dragging{opacity:.4;border:2px dashed var(--accent)}
+.place-card.drag-over{border-top:3px solid var(--accent)}
+.drag-handle{cursor:grab;color:var(--text3);font-size:13px;padding:2px 0;display:none;align-items:center;touch-action:none;user-select:none;flex-shrink:0}
+body.drag-mode .drag-handle{display:flex}
+.transit-row{display:flex;align-items:center;gap:4px;margin:3px 0 1px;padding:2px 6px;background:var(--surface3);border-radius:6px;font-size:11px;color:var(--text2)}
 .transit-dur{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);font-weight:500;margin-left:auto}
-.place-num{width:20px;height:20px;border-radius:50%;border:1.5px solid;font-size:10px;font-weight:700;
-  font-family:'DM Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.place-num{width:20px;height:20px;border-radius:50%;border:1.5px solid;font-size:10px;font-weight:700;font-family:'DM Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .place-info{flex:1;min-width:0}
 .place-name{font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .place-meta{font-size:11px;color:var(--text2);margin-top:1px;display:flex;align-items:center;gap:4px}
@@ -131,133 +100,97 @@ html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg)
 .who-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:1px 6px;border-radius:5px;margin-top:3px}
 .who-minseo{background:var(--minseo-bg);color:var(--minseo)}.who-hanbi{background:var(--hanbi-bg);color:var(--hanbi)}
 .place-actions{display:flex;gap:3px;flex-shrink:0;margin-top:1px}
-.pa{width:22px;height:22px;border-radius:4px;border:1px solid var(--border);background:var(--surface2);
-  color:var(--text2);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.pa{width:22px;height:22px;border-radius:4px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .pa:active{background:#fde8e8;border-color:var(--red);color:var(--red)}
 .pa.edit-btn:active{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
-
-/* ── MOBILE: bottom tab panel ── */
+.pa.dir-btn:active{background:var(--green-bg);border-color:var(--green);color:var(--green)}
 .mobile-panel-tabs{display:none;flex-shrink:0;background:var(--surface);border-top:1px solid var(--border);z-index:150}
-.mpt-inner{display:flex;justify-content:center;gap:0}
-.mpt{flex:1;padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;
-  font-size:10px;color:var(--text3);cursor:pointer;border:none;background:transparent;
-  border-top:2px solid transparent;transition:all .15s;max-width:80px}
+.mpt-inner{display:flex;justify-content:center}
+.mpt{flex:1;padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:var(--text3);cursor:pointer;border:none;background:transparent;border-top:2px solid transparent;transition:all .15s;max-width:100px}
 .mpt.on{color:var(--accent);border-top-color:var(--accent)}
 .mpt-icon{font-size:18px;line-height:1}
 .mobile-list-panel{display:none;flex-direction:column;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
-.mobile-list-panel.active{display:flex}
-.mobile-map-panel{display:none;flex:1;overflow:hidden}
-.mobile-map-panel.active{display:flex;flex-direction:column}
-
-/* ── POPUP ── */
-.popup-overlay{position:fixed;inset:0;background:rgba(26,25,23,.4);backdrop-filter:blur(3px);
-  z-index:9999;display:none;align-items:flex-end;justify-content:center}
+.popup-overlay{position:fixed;inset:0;background:rgba(26,25,23,.4);backdrop-filter:blur(3px);z-index:9999;display:none;align-items:flex-end;justify-content:center}
 .popup-overlay.show{display:flex}
-.popup{background:var(--surface);border-radius:16px 16px 0 0;padding:20px;width:100%;max-width:500px;
-  display:flex;flex-direction:column;gap:10px;max-height:90vh;overflow-y:auto;
-  box-shadow:0 -4px 30px rgba(0,0,0,.15)}
+.popup{background:var(--surface);border-radius:16px 16px 0 0;padding:20px;width:100%;max-width:500px;display:flex;flex-direction:column;gap:10px;max-height:90vh;overflow-y:auto;box-shadow:0 -4px 30px rgba(0,0,0,.15)}
 .popup-drag{width:40px;height:4px;border-radius:2px;background:var(--border2);margin:0 auto 4px}
 .popup-title{font-family:'Instrument Serif',serif;font-size:17px;color:var(--text)}
 .flabel{font-size:11px;color:var(--text3);margin-bottom:2px;font-weight:500}
-.popup input,.popup select,.popup textarea{background:var(--surface2);border:1px solid var(--border);
-  border-radius:8px;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:14px;
-  padding:9px 11px;outline:none;width:100%;transition:border-color .15s;-webkit-appearance:none}
+.popup input,.popup select,.popup textarea{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:14px;padding:9px 11px;outline:none;width:100%;transition:border-color .15s;-webkit-appearance:none}
 .popup input:focus,.popup select:focus,.popup textarea:focus{border-color:var(--accent);background:var(--surface)}
 .popup textarea{resize:none;height:60px}
 .popup-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .popup-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
 .popup-btns{display:flex;gap:8px;margin-top:4px}
-.pbtn{flex:1;padding:12px;border-radius:10px;font-size:14px;font-weight:600;
-  font-family:'Noto Sans KR',sans-serif;cursor:pointer;border:none;transition:all .15s}
+.pbtn{flex:1;padding:12px;border-radius:10px;font-size:14px;font-weight:600;font-family:'Noto Sans KR',sans-serif;cursor:pointer;border:none;transition:all .15s}
 .pbtn.save{background:var(--accent);color:#fff}
 .pbtn.cancel{background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
-.map-hint{font-size:11px;color:#0e9f7e;background:#eafaf5;border-radius:6px;padding:6px 10px}
+.map-hint{font-size:11px;color:var(--green);background:var(--green-bg);border-radius:6px;padding:6px 10px}
 .popup-sep{height:1px;background:var(--border)}
 .popup-sec{font-size:11px;font-weight:600;color:var(--text3);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
-
-/* Leaflet overrides */
-.leaflet-container{background:#e8e4dc !important}
-.leaflet-popup-content-wrapper{background:var(--surface) !important;border:1px solid var(--border) !important;border-radius:10px !important;color:var(--text) !important;box-shadow:0 4px 20px rgba(0,0,0,.12) !important}
-.leaflet-popup-tip{background:var(--surface) !important}
-.leaflet-popup-content{margin:10px 13px !important;font-family:'Noto Sans KR',sans-serif !important;font-size:12px !important;line-height:1.6 !important}
-.leaflet-control-zoom{border:1px solid var(--border) !important;box-shadow:0 1px 4px rgba(0,0,0,.08) !important}
-.leaflet-control-zoom a{background:var(--surface) !important;color:var(--text2) !important;border-color:var(--border) !important}
-.leaflet-control-attribution{background:rgba(245,244,241,.85) !important;color:var(--text3) !important;font-size:9px !important}
-
-/* ── SEARCH ── */
-.map-search-wrap{position:absolute;top:10px;left:10px;z-index:1000;display:flex;flex-direction:column;gap:4px;width:260px}
-.map-search-box{display:flex;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
-.map-search-input{flex:1;border:none;outline:none;padding:8px 12px;font-family:"Noto Sans KR",sans-serif;font-size:13px;color:var(--text);background:transparent}
+.map-search-wrap{position:absolute;top:10px;left:10px;z-index:1000;display:flex;flex-direction:column;gap:4px;width:260px;max-width:60%}
+.map-search-box{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.map-search-input{flex:1;border:none;outline:none;padding:8px 12px;font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--text);background:transparent}
 .map-search-input::placeholder{color:var(--text3)}
-.map-search-btn{padding:8px 12px;border:none;background:transparent;cursor:pointer;color:var(--text2);font-size:14px;transition:color .15s;border-left:1px solid var(--border)}
+.map-search-btn{padding:8px 12px;border:none;background:transparent;cursor:pointer;color:var(--text2);font-size:14px;border-left:1px solid var(--border)}
 .map-search-btn:hover{color:var(--accent)}
 .search-results{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);display:none;max-height:200px;overflow-y:auto}
 .search-results.show{display:block}
-.search-result-item{padding:8px 12px;cursor:pointer;font-size:12px;color:var(--text);border-bottom:1px solid var(--border);transition:background .1s;display:flex;flex-direction:column;gap:1px}
+.search-result-item{padding:8px 12px;cursor:pointer;font-size:12px;color:var(--text);border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:1px}
 .search-result-item:last-child{border-bottom:none}
-.search-result-item:hover,.search-result-item:active{background:var(--accent-bg)}
+.search-result-item:active{background:var(--accent-bg)}
 .search-result-name{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .search-result-addr{font-size:10px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .search-add-pin{position:absolute;z-index:1001;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px 14px;box-shadow:0 4px 16px rgba(0,0,0,.15);display:none;flex-direction:column;gap:8px;width:220px;font-size:12px}
 .search-add-pin.show{display:flex}
-.sap-name{font-weight:600;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sap-name{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sap-addr{font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sap-btn{padding:7px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:600;font-family:"Noto Sans KR",sans-serif;cursor:pointer;width:100%}
+.sap-btn{padding:7px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:600;font-family:'Noto Sans KR',sans-serif;cursor:pointer}
 .sap-close{position:absolute;top:8px;right:10px;background:none;border:none;cursor:pointer;color:var(--text3);font-size:14px}
-/* ── RESPONSIVE ── */
+.leaflet-container{background:#e8e4dc!important}
+.leaflet-popup-content-wrapper{background:var(--surface)!important;border:1px solid var(--border)!important;border-radius:10px!important;color:var(--text)!important;box-shadow:0 4px 20px rgba(0,0,0,.12)!important}
+.leaflet-popup-tip{background:var(--surface)!important}
+.leaflet-popup-content{margin:10px 13px!important;font-family:'Noto Sans KR',sans-serif!important;font-size:12px!important;line-height:1.6!important}
+.leaflet-popup-content a.gmap-link{display:inline-block;margin-top:5px;color:var(--accent);font-weight:600;text-decoration:none;font-size:11px}
+.leaflet-control-zoom{border:1px solid var(--border)!important;box-shadow:0 1px 4px rgba(0,0,0,.08)!important}
+.leaflet-control-zoom a{background:var(--surface)!important;color:var(--text2)!important;border-color:var(--border)!important}
+.leaflet-control-attribution{background:rgba(245,244,241,.85)!important;color:var(--text3)!important;font-size:9px!important}
 @media(max-width:700px){
-  .sidebar,.resize-handle{display:none !important}
+  .sidebar,.resize-handle{display:none!important}
   .main{flex-direction:column;flex:1;min-height:0;overflow:visible}
   .map-wrap{flex:none;height:45vw;min-height:180px;max-height:280px}
   .mobile-panel-tabs{display:block}
-  .mobile-list-panel{display:flex;flex:1;min-height:0;overflow-y:scroll !important;-webkit-overflow-scrolling:touch}
-  .mobile-list-panel.active{display:flex}
+  .mobile-list-panel{display:flex;flex:1;min-height:0;overflow-y:scroll!important;-webkit-overflow-scrolling:touch}
   .map-legend{display:none}
-  .place-actions{opacity:1 !important}
-  .popup{border-radius:16px 16px 0 0}
+  .place-actions{opacity:1!important}
   .split-cols{grid-template-columns:1fr}
 }
-@media(min-width:701px){
-  .mobile-list-panel,.mobile-panel-tabs{display:none !important}
-}
+@media(min-width:701px){.mobile-list-panel,.mobile-panel-tabs{display:none!important}}
 </style>
 </head>
 <body>
 <div class="app">
-  <!-- TOPBAR -->
   <div class="topbar">
     <div class="logo"><div class="logo-dot"></div>Tokyo Planner<span class="logo-sub">6.23–26</span></div>
     <div class="sync-badge">
       <div class="sync-dot" id="syncDot"></div>
       <span id="syncText">연결 중...</span>
-      <button onclick="resetData()" style="margin-left:6px;padding:2px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface2);color:var(--text3);font-size:10px;font-family:DM Mono,monospace;cursor:pointer" title="데이터를 기본값으로 초기화">초기화</button>
+      <button class="reset-btn" onclick="resetData()" title="기본값으로 초기화">초기화</button>
     </div>
   </div>
-
-  <!-- DAY TABS (always visible) -->
-  <div class="day-tabs-wrap">
-    <div class="day-tabs" id="dayTabs"></div>
-  </div>
-
-  <!-- MAIN -->
+  <div class="day-tabs-wrap"><div class="day-tabs" id="dayTabs"></div></div>
   <div class="main" id="mainArea">
-    <!-- DESKTOP SIDEBAR -->
     <div class="sidebar" id="sidebar"></div>
     <div class="resize-handle" id="resizeHandle"></div>
-
-    <!-- MAP (desktop: flex:1 | mobile: fixed height) -->
     <div class="map-wrap" id="mapWrap">
       <div id="map"></div>
-      <!-- MAP SEARCH -->
       <div class="map-search-wrap" id="mapSearchWrap">
         <div class="map-search-box">
-          <input class="map-search-input" id="mapSearchInput" placeholder="🔍 장소 검색..." autocomplete="off"
-            oninput="onSearchInput()" onkeydown="if(event.key==='Enter')doSearch()">
+          <input class="map-search-input" id="mapSearchInput" placeholder="🔍 장소 검색..." autocomplete="off" onkeydown="if(event.key==='Enter')doSearch()">
           <button class="map-search-btn" onclick="doSearch()">↵</button>
         </div>
         <div class="search-results" id="searchResults"></div>
       </div>
-      <!-- ADD PIN TOOLTIP -->
       <div class="search-add-pin" id="addPinTooltip">
         <button class="sap-close" onclick="closeAddPin()">✕</button>
         <div class="sap-name" id="addPinName"></div>
@@ -280,26 +213,16 @@ html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg)
         <div class="ml-item"><div class="ml-num" style="color:var(--hanbi);border-color:var(--hanbi)">1</div>한비</div>
       </div>
     </div>
-
-    <!-- MOBILE LIST PANEL (below map) -->
-    <div class="mobile-list-panel active" id="mobileList"></div>
+    <div class="mobile-list-panel" id="mobileList"></div>
   </div>
-
-  <!-- MOBILE BOTTOM TABS -->
   <div class="mobile-panel-tabs">
     <div class="mpt-inner">
-      <button class="mpt on" id="mptList" onclick="switchMobileTab('list')">
-        <span class="mpt-icon">📋</span>일정
-      </button>
-      <button class="mpt" id="mptMap" onclick="switchMobileTab('map')">
-        <span class="mpt-icon">🗺️</span>지도
-      </button>
-
+      <button class="mpt on" id="mptList" onclick="switchMobileTab('list')"><span class="mpt-icon">📋</span>일정</button>
+      <button class="mpt" id="mptMap" onclick="switchMobileTab('map')"><span class="mpt-icon">🗺️</span>지도</button>
     </div>
   </div>
 </div>
 
-<!-- POPUP -->
 <div class="popup-overlay" id="popupOverlay" onclick="handleOverlayClick(event)">
   <div class="popup">
     <div class="popup-drag"></div>
@@ -329,12 +252,7 @@ html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg)
     <div class="popup-sec">다음 장소로 이동</div>
     <div class="popup-row3">
       <div><div class="flabel">이동수단</div>
-        <select id="pTransitMode">
-          <option value="">없음</option><option value="walk">🚶 도보</option>
-          <option value="subway">🚇 지하철</option><option value="train">🚆 열차</option>
-          <option value="bus">🚌 버스</option><option value="taxi">🚕 택시</option>
-          <option value="monorail">🚝 모노레일</option>
-        </select>
+        <select id="pTransitMode"><option value="">없음</option><option value="walk">🚶 도보</option><option value="subway">🚇 지하철</option><option value="train">🚆 열차</option><option value="bus">🚌 버스</option><option value="taxi">🚕 택시</option><option value="monorail">🚝 모노레일</option></select>
       </div>
       <div><div class="flabel">소요시간</div><input id="pTransitMin" placeholder="15분" maxlength="10"></div>
       <div><div class="flabel">노선</div><input id="pTransitNote" placeholder="야마노테선" maxlength="20"></div>
@@ -347,7 +265,6 @@ html,body{height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg)
 </div>
 
 <script>
-// ── FIREBASE ──────────────────────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyAFY_aAUTYADDtQESKp-G__y-ARQKouqR4",
   authDomain: "tokyo-planner-47819.firebaseapp.com",
@@ -361,253 +278,169 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const plannerRef = db.ref('planner');
 
-// ── CONSTANTS ─────────────────────────────────────────────────
-const DAY_COLORS  = ['#3b7fff','#2ab87a','#e05a8a','#e09a2a'];
-const DAY_NAMES   = ['Day 1 · 6/23','Day 2 · 6/24','Day 3 · 6/25','Day 4 · 6/26'];
-const CAT_LABELS  = {tour:'🗼 관광',food:'🍜 맛집',shop:'🛍 쇼핑',cafe:'☕ 카페',show:'🎭 공연',hotel:'🏨 이동'};
-const CAT_ICONS   = {tour:'🗼',food:'🍜',shop:'🛍',cafe:'☕',show:'🎭',hotel:'🏨'};
-const CAT_COLORS  = {tour:'#3b7fff',food:'#e09a2a',shop:'#2ab87a',cafe:'#e0507a',show:'#7c3aed',hotel:'#a8a69f'};
-const WHO_LABEL   = {both:'둘 다',minseo:'민서',hanbi:'한비'};
-const WHO_COLORS  = {minseo:'#2a5cff',hanbi:'#e0407a',both:'#6b6860'};
-const TRANSIT_ICONS  = {walk:'🚶',subway:'🚇',train:'🚆',bus:'🚌',taxi:'🚕',monorail:'🚝'};
-const TRANSIT_LABELS = {walk:'도보',subway:'지하철',train:'열차',bus:'버스',taxi:'택시',monorail:'모노레일'};
+const DAY_COLORS=['#3b7fff','#2ab87a','#e05a8a','#e09a2a'];
+const DAY_NAMES=['Day 1 · 6/23','Day 2 · 6/24','Day 3 · 6/25','Day 4 · 6/26'];
+const CAT_LABELS={tour:'🗼 관광',food:'🍜 맛집',shop:'🛍 쇼핑',cafe:'☕ 카페',show:'🎭 공연',hotel:'🏨 이동'};
+const CAT_ICONS={tour:'🗼',food:'🍜',shop:'🛍',cafe:'☕',show:'🎭',hotel:'🏨'};
+const CAT_COLORS={tour:'#3b7fff',food:'#e09a2a',shop:'#2ab87a',cafe:'#e0507a',show:'#7c3aed',hotel:'#a8a69f'};
+const WHO_LABEL={both:'둘 다',minseo:'민서',hanbi:'한비'};
+const WHO_COLORS={minseo:'#2a5cff',hanbi:'#e0407a',both:'#6b6860'};
+const TRANSIT_ICONS={walk:'🚶',subway:'🚇',train:'🚆',bus:'🚌',taxi:'🚕',monorail:'🚝'};
+const TRANSIT_LABELS={walk:'도보',subway:'지하철',train:'열차',bus:'버스',taxi:'택시',monorail:'모노레일'};
 
-// ── DEFAULT DATA ───────────────────────────────────────────────
-const DEFAULT_PLACES = [
-  // DAY 1
-  {id:1,day:0,time:'12:40',name:'그레이스리 호텔 체크인',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,memo:'나리타 NEX 90분 / 하네다 40분',transit:{mode:'walk',min:'15분',note:'도보'}},
-  {id:2,day:0,time:'15:00',name:'신주쿠 교엔',cat:'tour',who:'both',lat:35.6852,lng:139.7100,memo:'17:30 마감 · 계절 따라 분위기 완전 다름',transit:{mode:'subway',min:'5분',note:'야마노테선'}},
-  {id:3,day:0,time:'16:30',name:'메이지진구 · 요요기 공원',cat:'tour',who:'both',lat:35.6764,lng:139.6993,memo:'울창한 숲 속 신사 · 요요기 공원 피크닉 분위기 · 모헤지까지 도보 15분',transit:{mode:'walk',min:'15분',note:'도보'}},
-  {id:4,day:0,time:'19:00',name:'모헤지 시부야 스크램블스퀘어',cat:'food',who:'both',lat:35.6583,lng:139.7022,memo:'몬자야끼 · 12F · 평점 4.8 · 11시 오픈 · 줄 있을 수 있음',transit:{mode:'subway',min:'5분',note:'야마노테선→신주쿠'}},
-  {id:46,day:0,time:'19:30',name:'디즈니 플래그십 도쿄',cat:'shop',who:'both',lat:35.6930,lng:139.7006,memo:'신주쿠 기노쿠니야 옆 · 상설 · 아젤란즈 토트백 · 호텔 도보 5분',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:5,day:0,time:'20:30',name:'가부키초 골든가이',cat:'tour',who:'both',lat:35.6953,lng:139.7008,memo:'도쿄 골목 바 문화 · 구경만 해도 재밌음',transit:null},
-  // ── DAY 2 · 공연의 날 ──────────────────────────────────────
-  // 오전: 마루노우치 카페 → 캐릭터스트리트 (도쿄역 권역)
-  // 점심: 긴자 카가리 (도보 8분)
-  // 오후: 긴자 산책 (이토야·긴자 식스)
-  // 이른 저녁: 유라쿠초 가드시타 (같이)
-  // 분기: 민서→시부야(스타워즈·디즈니·타워레코즈) / 한비→공연장
-  // 21시: 합류 뒤풀이
-
-  // ── 공통 오전~저녁 ──
-  {id:6,day:1,time:'00:00',name:'그레이스리 호텔 (출발)',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,
-   memo:'오늘의 시작점',transit:{mode:'subway',min:'15분',note:'JR 중앙선'}},
-  {id:7,day:1,time:'09:30',name:'마루노우치 카페',cat:'cafe',who:'both',lat:35.6823,lng:139.7656,
-   memo:'도쿄역 마루노우치 남쪽 · KITTE 1F 등 현지인 카페',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:17,day:1,time:'10:30',name:'도쿄역 캐릭터스트리트',cat:'shop',who:'both',lat:35.6812,lng:139.7671,
-   memo:'B1F · 10:00-20:30 · 카페에서 도보 5분 · 긴자까지 도보 8분',transit:{mode:'walk',min:'8분',note:'도보'}},
-  {id:16,day:1,time:'12:00',name:'긴자 카가리 닭라멘',cat:'food',who:'both',lat:35.6712,lng:139.7613,
-   memo:'크리미한 닭 파이탄 · 줄 있으면 14시대가 짧음',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:40,day:1,time:'13:30',name:'긴자 이토야',cat:'shop',who:'both',lat:35.6713,lng:139.7640,
-   memo:'문구 본점 12층 · 현지인 쇼핑 성지',transit:{mode:'walk',min:'2분',note:'도보'}},
-  {id:50,day:1,time:'14:15',name:'긴자 미츠코시',cat:'shop',who:'both',lat:35.6716,lng:139.7637,
-   memo:'긴자 메인스트리트 · 지하 식품관 필수 · 화장품·패션',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:51,day:1,time:'15:00',name:'긴자 식스',cat:'shop',who:'both',lat:35.6697,lng:139.7634,
-   memo:'옥상정원 무료 · 현대미술 설치작품 · 고급 브랜드',transit:{mode:'walk',min:'10분',note:'도보'}},
-  {id:41,day:1,time:'16:00',name:'유라쿠초 가드시타 이른 저녁',cat:'food',who:'both',lat:35.6735,lng:139.7612,
-   memo:'JR 고가 밑 이자카야 골목 · 현지 직장인 성지 · 야끼토리·맥주',transit:null},
-
-  // ── 민서: 시부야 저녁 ──
-  {id:48,day:1,time:'17:30',name:'시부야 TSUTAYA 스타워즈 팝업',cat:'shop',who:'minseo',lat:35.6598,lng:139.6986,
-   memo:'B1F · 7월 16일까지 · 화한 디자인 티셔츠 위주 · 유라쿠초→시부야 긴자선 15분',transit:{mode:'walk',min:'3분',note:'도보'}},
-  {id:8,day:1,time:'18:00',name:'BOX카페 스타워즈',cat:'cafe',who:'minseo',lat:35.6594,lng:139.6989,
-   memo:'SHIBUYA109 B2F · TSUTAYA에서 도보 3분',transit:{mode:'walk',min:'3분',note:'도보'}},
-  {id:9,day:1,time:'18:30',name:'디즈니스토어 시부야',cat:'shop',who:'minseo',lat:35.6613,lng:139.7002,
-   memo:'3층 구조 · 일본한정 굿즈',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:42,day:1,time:'19:15',name:'타워레코즈 시부야',cat:'shop',who:'minseo',lat:35.6610,lng:139.6988,
-   memo:'7층 세계 최대 규모 · LP·한정판·J-POP',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:10,day:1,time:'19:30',name:'시부야 스크램블 야경 산책',cat:'tour',who:'minseo',lat:35.6614,lng:139.7024,
-   memo:'스크램블 야경 · 미야시타파크 루프탑',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
-  {id:49,day:1,time:'20:15',name:'이케부쿠로 PARCO 스타워즈 팝업',cat:'shop',who:'minseo',lat:35.7295,lng:139.7109,
-   memo:'B2F · 8월 16일까지 · 소물·잡화 위주',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
-
-  // ── 한비: 공연 ──
-  {id:14,day:1,time:'18:30',name:'공연 관람',cat:'show',who:'hanbi',lat:35.7056,lng:139.7520,
-   memo:'18:30~21:00 · 유라쿠초에서 이동',transit:null},
-
-  // ── 합류 ──
-  {id:43,day:1,time:'21:00',name:'뒤풀이 (장소 미정)',cat:'food',who:'both',lat:35.6930,lng:139.7010,
-   memo:'공연 끝나고 합류! 신주쿠 or 시부야 이자카야 · 장소 정해지면 수정',transit:null},
-  // DAY 3
-  {id:18,day:2,time:'00:00',name:'그레이스리 호텔 (출발)',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,memo:'오늘의 시작점',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
-  {id:19,day:2,time:'12:30',name:'Sushi Issei (스시 잇세이)',cat:'food',who:'both',lat:35.6671,lng:139.7136,memo:'오모테산도역 도보 2분 · 점심 런치 세트 · 화요~일 11:30 오픈',transit:{mode:'walk',min:'8분',note:'도보'}},
-  {id:20,day:2,time:'10:00',name:'Hysteric Glamour',cat:'shop',who:'both',lat:35.6652,lng:139.7026,memo:'진구마에 6초메 · 록/빈티지 무드 일본 대표 브랜드',transit:{mode:'walk',min:'3분',note:'도보'}},
-  {id:45,day:2,time:'10:30',name:'PONEYCOMB TOKYO (라포레 하라주쿠 4F)',cat:'shop',who:'both',lat:35.6702,lng:139.7027,memo:'라포레 하라주쿠 4F · 11:00 오픈 · 디즈니·스타워즈·마블 캐릭터 어패럴',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:21,day:2,time:'11:00',name:'우라하라주쿠 골목 쇼핑',cat:'shop',who:'both',lat:35.6697,lng:139.7074,memo:'BAPE · Stussy · Beams · WTaps · 골목 보물찾기',transit:{mode:'walk',min:'8분',note:'도보'}},
-  {id:22,day:2,time:'14:00',name:'Visvim (GYRE 2F)',cat:'shop',who:'both',lat:35.6674,lng:139.7068,memo:'오모테산도 GYRE 빌딩 2F · 일본 핸드크래프트 하이엔드',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:23,day:2,time:'15:30',name:'명곡킷사 라이온',cat:'cafe',who:'both',lat:35.6593,lng:139.6964,memo:'1927년 오픈 정통 킷사텐 · 클래식 음악 · 말 금지 조용한 공간 · 시부야 도겐자카',transit:{mode:'walk',min:'7분',note:'도보'}},
-  {id:24,day:2,time:'16:00',name:'COMME des GARCONS 아오야마',cat:'shop',who:'both',lat:35.6642,lng:139.7137,memo:'미나미아오야마 · 플래그십 · 건물 자체가 작품',transit:{mode:'walk',min:'3분',note:'도보'}},
-  {id:25,day:2,time:'16:45',name:'BAO BAO Issey Miyake 아오야마',cat:'shop',who:'both',lat:35.6645,lng:139.7139,memo:'꼼데 바로 옆 · 바오바오 백 일본 직구 찬스',transit:{mode:'walk',min:'15분',note:'도보'}},
-  {id:26,day:2,time:'21:30',name:'삿포로 수프카레 도미니카',cat:'food',who:'both',lat:35.6905,lng:139.7044,memo:'신주쿠 3초메 B1F · 호텔 도보 5분 · 자정 영업',transit:null},
-  {id:44,day:2,time:'17:30',name:'롯폰기힐스 야경 산책 · 쇼핑',cat:'shop',who:'both',lat:35.6604,lng:139.7292,
-   memo:'모리타워 주변 야경 · 웨스트워크 쇼핑 · 옥상 가든 무료 · 도쿄타워 뷰',transit:{mode:'walk',min:'15분',note:'도보'}},
-  {id:27,day:2,time:'19:30',name:'시바 공원 · 도쿄타워 야경',cat:'tour',who:'both',lat:35.6558,lng:139.7453,memo:'도쿄타워 바로 옆 무료 공원 · 야경 명소 · 인생샷 각',transit:{mode:'subway',min:'20분',note:'오에도선→신주쿠'}},
-  // DAY 4
-  {id:28,day:3,time:'00:00',name:'그레이스리 호텔 (출발)',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,memo:'체크아웃 후 짐 맡기기',transit:{mode:'train',min:'10분',note:'오다큐선'}},
-  {id:29,day:3,time:'09:30',name:'시모키타자와 빈티지 쇼핑',cat:'shop',who:'both',lat:35.6613,lng:139.6677,memo:'빈티지 천국 · 레코드·카페·독립샵 · 현지 20대 성지',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:30,day:3,time:'11:00',name:'시모키타자와 카페',cat:'cafe',who:'both',lat:35.6617,lng:139.6681,memo:'감성 골목 카페 · 마지막 날 여유',transit:{mode:'train',min:'10분',note:'오다큐선'}},
-  {id:31,day:3,time:'12:00',name:'츠루톤탄 우동',cat:'food',who:'both',lat:35.6953,lng:139.7032,memo:'신주쿠 복귀 · 가부키초 B1F · 호텔 도보 3분',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:32,day:3,time:'13:00',name:'도라쿠 야끼니꾸 (시간 여유 시)',cat:'food',who:'both',lat:35.6952,lng:139.7006,memo:'가부키초 B1F · 11:30 오픈 · 나리타면 생략',transit:{mode:'walk',min:'5분',note:'도보'}},
-  {id:33,day:3,time:'13:30',name:'공항 이동 출발',cat:'hotel',who:'both',lat:35.6930,lng:139.7003,memo:'나리타 NEX 12:30 탑승 권장 / 하네다 40분',transit:null},
+const DEFAULT_PLACES=[
+  {id:1,day:0,order:0,time:'12:40',name:'그레이스리 호텔 체크인',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,memo:'나리타 NEX 90분 / 하네다 40분',transit:{mode:'walk',min:'15분',note:'도보'}},
+  {id:2,day:0,order:1,time:'15:00',name:'신주쿠 교엔',cat:'tour',who:'both',lat:35.6852,lng:139.7100,memo:'17:30 마감 · 계절 따라 분위기 다름',transit:{mode:'subway',min:'5분',note:'야마노테선'}},
+  {id:3,day:0,order:2,time:'16:30',name:'메이지진구 · 요요기 공원',cat:'tour',who:'both',lat:35.6764,lng:139.6993,memo:'울창한 숲 속 신사 · 요요기 공원 피크닉 · 모헤지까지 도보 15분',transit:{mode:'walk',min:'15분',note:'도보'}},
+  {id:4,day:0,order:3,time:'19:00',name:'모헤지 시부야 스크램블스퀘어',cat:'food',who:'both',lat:35.6583,lng:139.7022,memo:'몬자야끼 · 12F · 평점 4.8 · 11시 오픈 · 줄 있을 수 있음',transit:{mode:'subway',min:'5분',note:'야마노테선→신주쿠'}},
+  {id:46,day:0,order:4,time:'19:30',name:'디즈니 플래그십 도쿄',cat:'shop',who:'both',lat:35.6930,lng:139.7006,memo:'신주쿠 기노쿠니야 옆 · 상설 · 아젤란즈 토트백 · 호텔 도보 5분',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:5,day:0,order:5,time:'20:30',name:'가부키초 골든가이',cat:'tour',who:'both',lat:35.6953,lng:139.7008,memo:'도쿄 골목 바 문화 · 구경만 해도 재밌음',transit:null},
+  {id:6,day:1,order:0,time:'00:00',name:'그레이스리 호텔 (출발)',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,memo:'오늘의 시작점',transit:{mode:'subway',min:'15분',note:'JR 중앙선'}},
+  {id:7,day:1,order:1,time:'09:30',name:'마루노우치 카페',cat:'cafe',who:'both',lat:35.6823,lng:139.7656,memo:'도쿄역 마루노우치 남쪽 · KITTE 1F 등 현지인 카페',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:17,day:1,order:2,time:'10:30',name:'도쿄역 캐릭터스트리트',cat:'shop',who:'both',lat:35.6812,lng:139.7671,memo:'B1F · 10:00-20:30 · 카페에서 도보 5분 · 긴자까지 도보 8분',transit:{mode:'walk',min:'8분',note:'도보'}},
+  {id:16,day:1,order:3,time:'12:00',name:'긴자 카가리 닭라멘',cat:'food',who:'both',lat:35.6712,lng:139.7613,memo:'크리미한 닭 파이탄 · 줄 있으면 14시대가 짧음',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:40,day:1,order:4,time:'13:30',name:'긴자 이토야',cat:'shop',who:'both',lat:35.6713,lng:139.7640,memo:'문구 본점 12층 · 현지인 쇼핑 성지',transit:{mode:'walk',min:'2분',note:'도보'}},
+  {id:50,day:1,order:5,time:'14:15',name:'긴자 미츠코시',cat:'shop',who:'both',lat:35.6716,lng:139.7637,memo:'긴자 메인스트리트 · 지하 식품관 필수 · 화장품·패션',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:51,day:1,order:6,time:'15:00',name:'긴자 식스',cat:'shop',who:'both',lat:35.6697,lng:139.7634,memo:'옥상정원 무료 · 현대미술 설치작품 · 고급 브랜드',transit:{mode:'walk',min:'10분',note:'도보'}},
+  {id:41,day:1,order:7,time:'16:00',name:'유라쿠초 가드시타 이른 저녁',cat:'food',who:'both',lat:35.6735,lng:139.7612,memo:'JR 고가 밑 이자카야 골목 · 현지 직장인 성지 · 야끼토리·맥주',transit:null},
+  {id:43,day:1,order:20,time:'21:00',name:'뒤풀이 (장소 미정)',cat:'food',who:'both',lat:35.6930,lng:139.7010,memo:'공연 끝나고 합류! 신주쿠 or 시부야 이자카야 · 장소 정해지면 수정',transit:null},
+  {id:48,day:1,order:10,time:'17:30',name:'시부야 TSUTAYA 스타워즈 팝업',cat:'shop',who:'minseo',lat:35.6598,lng:139.6986,memo:'Q Front B1F · 7월 16일까지 · 화한 디자인 티셔츠 위주',transit:{mode:'walk',min:'3분',note:'도보'}},
+  {id:8,day:1,order:11,time:'18:00',name:'BOX카페 스타워즈',cat:'cafe',who:'minseo',lat:35.6594,lng:139.6989,memo:'SHIBUYA109 B2F · TSUTAYA에서 도보 3분 · 운영 확인 필수',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:9,day:1,order:12,time:'18:45',name:'디즈니스토어 시부야',cat:'shop',who:'minseo',lat:35.6613,lng:139.7002,memo:'3층 구조 · 플래그십과 중복 시 생략 가능',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:42,day:1,order:13,time:'19:15',name:'타워레코즈 시부야',cat:'shop',who:'minseo',lat:35.6610,lng:139.6988,memo:'7층 세계 최대 규모 · LP·한정판·J-POP',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
+  {id:10,day:1,order:14,time:'19:30',name:'시부야 스크램블 야경 산책',cat:'tour',who:'minseo',lat:35.6614,lng:139.7024,memo:'스크램블 야경 · 미야시타파크 루프탑',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
+  {id:49,day:1,order:15,time:'20:15',name:'이케부쿠로 PARCO 스타워즈 팝업',cat:'shop',who:'minseo',lat:35.7295,lng:139.7109,memo:'B2F · 8월 16일까지 · 소물·잡화 위주',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
+  {id:14,day:1,order:10,time:'18:30',name:'공연 관람',cat:'show',who:'hanbi',lat:35.7056,lng:139.7520,memo:'18:30~21:00 · 유라쿠초에서 이동',transit:null},
+  {id:18,day:2,order:0,time:'00:00',name:'그레이스리 호텔 (출발)',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,memo:'오늘의 시작점',transit:{mode:'subway',min:'15분',note:'야마노테선'}},
+  {id:20,day:2,order:1,time:'10:00',name:'Hysteric Glamour',cat:'shop',who:'both',lat:35.6652,lng:139.7026,memo:'진구마에 6초메 · 록/빈티지 무드 일본 대표 브랜드',transit:{mode:'walk',min:'3분',note:'도보'}},
+  {id:45,day:2,order:2,time:'10:30',name:'PONEYCOMB TOKYO (라포레 하라주쿠 4F)',cat:'shop',who:'both',lat:35.6702,lng:139.7027,memo:'라포레 하라주쿠 4F · 11:00 오픈 · 디즈니·스타워즈·마블 캐릭터 어패럴',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:21,day:2,order:3,time:'11:00',name:'우라하라주쿠 골목 쇼핑',cat:'shop',who:'both',lat:35.6697,lng:139.7074,memo:'BAPE · Stussy · Beams · WTaps · 골목 보물찾기',transit:{mode:'walk',min:'8분',note:'도보'}},
+  {id:19,day:2,order:4,time:'12:30',name:'Sushi Issei (스시 잇세이)',cat:'food',who:'both',lat:35.6671,lng:139.7136,memo:'오모테산도역 도보 2분 · 점심 런치 세트 · 화~일 11:30 오픈',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:22,day:2,order:5,time:'14:00',name:'Visvim (GYRE 2F)',cat:'shop',who:'both',lat:35.6674,lng:139.7068,memo:'오모테산도 GYRE 빌딩 2F · 일본 핸드크래프트 하이엔드',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:23,day:2,order:6,time:'15:30',name:'명곡킷사 라이온',cat:'cafe',who:'both',lat:35.6593,lng:139.6964,memo:'1927년 오픈 정통 킷사텐 · 클래식 음악 · 시부야 도겐자카',transit:{mode:'walk',min:'10분',note:'도보'}},
+  {id:24,day:2,order:7,time:'16:00',name:'COMME des GARCONS 아오야마',cat:'shop',who:'both',lat:35.6642,lng:139.7137,memo:'미나미아오야마 · 플래그십 · 건물 자체가 작품',transit:{mode:'walk',min:'3분',note:'도보'}},
+  {id:25,day:2,order:8,time:'16:45',name:'BAO BAO Issey Miyake 아오야마',cat:'shop',who:'both',lat:35.6645,lng:139.7139,memo:'꼼데 바로 옆 · 바오바오 백 일본 직구 찬스',transit:{mode:'walk',min:'15분',note:'도보'}},
+  {id:44,day:2,order:9,time:'17:30',name:'롯폰기힐스 야경 산책 · 쇼핑',cat:'shop',who:'both',lat:35.6604,lng:139.7292,memo:'모리타워 주변 야경 · 웨스트워크 쇼핑 · 옥상 가든 무료 · 도쿄타워 뷰',transit:{mode:'walk',min:'15분',note:'도보'}},
+  {id:27,day:2,order:10,time:'19:30',name:'시바 공원 · 도쿄타워 야경',cat:'tour',who:'both',lat:35.6558,lng:139.7453,memo:'도쿄타워 바로 옆 무료 공원 · 야경 명소 · 인생샷 각',transit:{mode:'subway',min:'20분',note:'오에도선→신주쿠'}},
+  {id:26,day:2,order:11,time:'21:30',name:'삿포로 수프카레 도미니카',cat:'food',who:'both',lat:35.6905,lng:139.7044,memo:'신주쿠 3초메 B1F · 호텔 도보 5분 · 자정 영업',transit:null},
+  {id:28,day:3,order:0,time:'00:00',name:'그레이스리 호텔 (출발)',cat:'hotel',who:'both',lat:35.6955,lng:139.7020,memo:'체크아웃 후 짐 맡기기',transit:{mode:'train',min:'10분',note:'오다큐선'}},
+  {id:29,day:3,order:1,time:'09:30',name:'시모키타자와 빈티지 쇼핑',cat:'shop',who:'both',lat:35.6613,lng:139.6677,memo:'빈티지 천국 · 레코드·카페·독립샵 · 현지 20대 성지',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:30,day:3,order:2,time:'11:00',name:'시모키타자와 카페',cat:'cafe',who:'both',lat:35.6617,lng:139.6681,memo:'감성 골목 카페 · 마지막 날 여유',transit:{mode:'train',min:'10분',note:'오다큐선'}},
+  {id:31,day:3,order:3,time:'12:00',name:'츠루톤탄 우동',cat:'food',who:'both',lat:35.6953,lng:139.7032,memo:'신주쿠 복귀 · 가부키초 B1F · 호텔 도보 3분',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:32,day:3,order:4,time:'13:00',name:'도라쿠 야끼니꾸 (시간 여유 시)',cat:'food',who:'both',lat:35.6952,lng:139.7006,memo:'가부키초 B1F · 11:30 오픈 · 나리타면 생략',transit:{mode:'walk',min:'5분',note:'도보'}},
+  {id:33,day:3,order:5,time:'13:30',name:'공항 이동 출발',cat:'hotel',who:'both',lat:35.6930,lng:139.7003,memo:'나리타 NEX 12:30 탑승 권장 / 하네다 40분',transit:null},
 ];
 
-// ── STATE ──────────────────────────────────────────────────────
-let places = [];
-let memos  = {};
-let activeDay = 0;
-let editingId = null;
-let routeVisible = true;
-let routeLines = [], transitLabels = [], markers = {};
-let tempMarker = null;
-let memoVisible = false;
-let mobileTab = 'list';
-let fbLoaded = false;
+let places=[],memos={},activeDay=0,editingId=null,routeVisible=true;
+let routeLines=[],transitLabels=[],markers={},tempMarker=null,memoVisible=false,mobileTab='list',fbLoaded=false;
+let dragMode=false,draggedId=null;
 
-// ── FIREBASE SYNC ──────────────────────────────────────────────
-function setSyncStatus(status) {
-  const dot = document.getElementById('syncDot');
-  const txt = document.getElementById('syncText');
-  if (status === 'live')   { dot.className='sync-dot live';  txt.textContent='실시간 동기화'; }
-  if (status === 'saving') { dot.className='sync-dot saving';txt.textContent='저장 중...'; }
-  if (status === 'off')    { dot.className='sync-dot';       txt.textContent='오프라인'; }
+function sortPlaces(arr){
+  return arr.slice().sort((a,b)=>{
+    if(dragMode){
+      const oa=a.order!==undefined?a.order:9999, ob=b.order!==undefined?b.order:9999;
+      if(oa!==ob) return oa-ob;
+    }
+    return (a.time||'').localeCompare(b.time||'');
+  });
 }
-
-// Listen for remote changes
-plannerRef.on('value', snap => {
-  const data = snap.val();
-  if (!data) {
-    // First time: push defaults
-    plannerRef.set({ places: DEFAULT_PLACES, memos: {}, day: 0 });
-    return;
-  }
-  // Convert Firebase object back to array if needed
-  if (data.places && !Array.isArray(data.places)) {
-    places = Object.values(data.places);
-  } else {
-    places = data.places || DEFAULT_PLACES;
-  }
-  memos = data.memos || {};
-  if (!fbLoaded) {
-    activeDay = data.day || 0;
-    fbLoaded = true;
-  }
-  setSyncStatus('live');
-  renderAll();
-}, err => {
+function setSyncStatus(s){
+  const d=document.getElementById('syncDot'),t=document.getElementById('syncText');
+  if(s==='live'){d.className='sync-dot live';t.textContent='실시간 동기화';}
+  if(s==='saving'){d.className='sync-dot saving';t.textContent='저장 중...';}
+  if(s==='off'){d.className='sync-dot';t.textContent='오프라인';}
+}
+plannerRef.on('value',snap=>{
+  const data=snap.val();
+  if(!data){plannerRef.set({places:DEFAULT_PLACES,memos:{},day:0});return;}
+  places=Array.isArray(data.places)?data.places:(data.places?Object.values(data.places):DEFAULT_PLACES);
+  memos=data.memos||{};
+  if(!fbLoaded){activeDay=data.day||0;fbLoaded=true;}
+  setSyncStatus('live');renderAll();
+},err=>{
   setSyncStatus('off');
-  // fallback to localStorage
-  try {
-    const s = localStorage.getItem('tokyo-planner-local');
-    if (s) { const d=JSON.parse(s); places=d.places||DEFAULT_PLACES; memos=d.memos||{}; activeDay=d.day||0; }
-    else { places=JSON.parse(JSON.stringify(DEFAULT_PLACES)); }
-  } catch(e) { places=JSON.parse(JSON.stringify(DEFAULT_PLACES)); }
+  try{const s=localStorage.getItem('tokyo-planner-local');if(s){const d=JSON.parse(s);places=d.places||DEFAULT_PLACES;memos=d.memos||{};}else places=JSON.parse(JSON.stringify(DEFAULT_PLACES));}catch(e){places=JSON.parse(JSON.stringify(DEFAULT_PLACES));}
   renderAll();
 });
-
-function saveToFirebase() {
+function saveToFirebase(){
   setSyncStatus('saving');
-  plannerRef.set({ places, memos, day: activeDay })
-    .then(()=>setSyncStatus('live'))
-    .catch(()=>{
-      setSyncStatus('off');
-      localStorage.setItem('tokyo-planner-local', JSON.stringify({places,memos,day:activeDay}));
-    });
+  plannerRef.set({places,memos,day:activeDay}).then(()=>setSyncStatus('live')).catch(()=>{setSyncStatus('off');localStorage.setItem('tokyo-planner-local',JSON.stringify({places,memos,day:activeDay}));});
+}
+function resetData(){
+  if(!confirm('일정을 기본값으로 초기화할까요? 수정한 내용이 모두 사라집니다.'))return;
+  places=JSON.parse(JSON.stringify(DEFAULT_PLACES));memos={};activeDay=0;
+  saveToFirebase();renderAll();setTimeout(fitAll,300);
 }
 
-// ── MAP ────────────────────────────────────────────────────────
-const map = L.map('map',{zoomControl:true}).setView([35.690,139.710],13);
+const map=L.map('map',{zoomControl:true}).setView([35.690,139.710],13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(map);
 
-function makeNumIcon(num, color) {
-  const isZ = num===0;
-  return L.divIcon({className:'',
-    html:`<div style="width:${isZ?26:28}px;height:${isZ?26:28}px;border-radius:${isZ?'50%':'50% 50% 50% 0'};transform:${isZ?'none':'rotate(-45deg)'};background:${color};border:2px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.2)"><span style="transform:${isZ?'none':'rotate(45deg)'};font-size:10px;font-weight:700;color:#fff;font-family:monospace">${num}</span></div>`,
-    iconSize:[28,28],iconAnchor:[14,isZ?14:28],popupAnchor:[0,-30]});
+function makeNumIcon(num,color){
+  const isZ=num===0;
+  return L.divIcon({className:'',html:`<div style="width:${isZ?26:28}px;height:${isZ?26:28}px;border-radius:${isZ?'50%':'50% 50% 50% 0'};transform:${isZ?'none':'rotate(-45deg)'};background:${color};border:2px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.2)"><span style="transform:${isZ?'none':'rotate(45deg)'};font-size:10px;font-weight:700;color:#fff;font-family:monospace">${num}</span></div>`,iconSize:[28,28],iconAnchor:[14,isZ?14:28],popupAnchor:[0,-30]});
 }
-
 function midpoint(a,b){return [(a[0]+b[0])/2,(a[1]+b[1])/2];}
-
 function makeTransitLabel(p,color){
-  if(!p.transit||!p.transit.mode) return null;
-  const t=p.transit, icon=TRANSIT_ICONS[t.mode]||'', label=TRANSIT_LABELS[t.mode]||t.mode;
+  if(!p.transit||!p.transit.mode)return null;
+  const t=p.transit,icon=TRANSIT_ICONS[t.mode]||'',label=TRANSIT_LABELS[t.mode]||t.mode;
   const note=t.note&&t.note!==label?` · ${t.note}`:'';
-  return L.divIcon({className:'',
-    html:`<div class="transit-label" style="border-color:${color}50">${icon} <span>${label}${note}</span>${t.min?`<span style="color:${color};font-weight:700;font-family:monospace;margin-left:3px">${t.min}</span>`:''}</div>`,
-    iconAnchor:[0,10]});
+  return L.divIcon({className:'',html:`<div class="transit-label" style="border-color:${color}50">${icon} <span>${label}${note}</span>${t.min?`<span style="color:${color};font-weight:700;font-family:monospace;margin-left:3px">${t.min}</span>`:''}</div>`,iconAnchor:[0,10]});
 }
-
-function clearRouteLayer(){
-  routeLines.forEach(l=>map.removeLayer(l)); routeLines=[];
-  transitLabels.forEach(l=>map.removeLayer(l)); transitLabels=[];
-}
-
-function drawGroup(pts, color){
-  if(pts.length<2) return;
+function clearRouteLayer(){routeLines.forEach(l=>map.removeLayer(l));routeLines=[];transitLabels.forEach(l=>map.removeLayer(l));transitLabels=[];}
+function drawGroup(pts,color){
+  if(pts.length<2)return;
   for(let i=0;i<pts.length-1;i++){
-    const {p:fp,ll:from}=pts[i], {ll:to}=pts[i+1];
+    const {p:fp,ll:from}=pts[i],{ll:to}=pts[i+1];
     routeLines.push(L.polyline([from,to],{color,weight:2.5,opacity:.5,dashArray:'6 4'}).addTo(map));
-    if(fp.transit&&fp.transit.mode){
-      const icon=makeTransitLabel(fp,color);
-      if(icon) transitLabels.push(L.marker(midpoint(from,to),{icon,interactive:false,zIndexOffset:-100}).addTo(map));
-    }
+    if(fp.transit&&fp.transit.mode){const icon=makeTransitLabel(fp,color);if(icon)transitLabels.push(L.marker(midpoint(from,to),{icon,interactive:false,zIndexOffset:-100}).addTo(map));}
   }
 }
-
+function gmapDirUrl(prev,p){
+  if(prev&&prev.lat&&prev.lng) return `https://www.google.com/maps/dir/?api=1&origin=${prev.lat},${prev.lng}&destination=${p.lat},${p.lng}&travelmode=transit`;
+  return `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`;
+}
 function renderMarkers(){
-  Object.values(markers).forEach(m=>map.removeLayer(m)); markers={};
-  clearRouteLayer();
+  Object.values(markers).forEach(m=>map.removeLayer(m));markers={};clearRouteLayer();
   const dp=places.filter(p=>p.day===activeDay);
-
-  function pm(p,num,color){
-    if(!p.lat||!p.lng) return;
+  function pm(p,num,color,grp){
+    if(!p.lat||!p.lng)return;
     const wc=p.who==='minseo'?'#2a5cff':p.who==='hanbi'?'#e0407a':'inherit';
     const wt=p.who!=='both'?`<br><b style="font-size:11px;color:${wc}">${WHO_LABEL[p.who]}</b>`:'';
     const tt=p.transit&&p.transit.mode?`<br><span style="font-size:11px;color:#888">${TRANSIT_ICONS[p.transit.mode]} → ${TRANSIT_LABELS[p.transit.mode]}${p.transit.min?' '+p.transit.min:''}${p.transit.note&&p.transit.note!==TRANSIT_LABELS[p.transit.mode]?' · '+p.transit.note:''}</span>`:'';
+    const idx=grp.findIndex(x=>x.id===p.id);const prev=idx>0?grp[idx-1]:null;
+    const dirUrl=gmapDirUrl(prev,p);
     const m=L.marker([p.lat,p.lng],{icon:makeNumIcon(num,color)}).addTo(map)
-      .bindPopup(`<b style="font-size:13px">${p.name}</b>${p.time&&p.time!=='00:00'?'<br><span style="color:#888;font-size:11px">⏰ '+p.time+'</span>':''}${wt}${p.memo?'<br><span style="color:#c96a0a;font-size:11px">'+p.memo+'</span>':''}${tt}`);
-    m.on('click',()=>highlightCard(p.id));
-    markers[p.id]=m;
+      .bindPopup(`<b style="font-size:13px">${p.name}</b>${p.time&&p.time!=='00:00'?'<br><span style="color:#888;font-size:11px">⏰ '+p.time+'</span>':''}${wt}${p.memo?'<br><span style="color:#c96a0a;font-size:11px">'+p.memo+'</span>':''}${tt}<br><a class="gmap-link" href="${dirUrl}" target="_blank">🧭 구글맵 길찾기 →</a>`);
+    m.on('click',()=>highlightCard(p.id));markers[p.id]=m;
   }
-
   if(activeDay===1){
     ['both','minseo','hanbi'].forEach(who=>{
-      const grp=dp.filter(p=>p.who===who).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+      const grp=sortPlaces(dp.filter(p=>p.who===who));
       const color=who==='both'?DAY_COLORS[1]:WHO_COLORS[who];
-      let n=0; const pts=[];
-      grp.forEach(p=>{const isH=p.cat==='hotel';const num=isH?0:++n;pm(p,num,isH?'#a8a69f':color);if(p.lat&&p.lng)pts.push({p,ll:[p.lat,p.lng]});});
-      if(routeVisible) drawGroup(pts,color);
+      let n=0;const pts=[];
+      grp.forEach(p=>{const isH=p.cat==='hotel';const num=isH?0:++n;pm(p,num,isH?'#a8a69f':color,grp);if(p.lat&&p.lng)pts.push({p,ll:[p.lat,p.lng]});});
+      if(routeVisible)drawGroup(pts,color);
     });
-  } else {
-    const sorted=dp.sort((a,b)=>(a.time||'').localeCompare(b.time||''));
-    const color=DAY_COLORS[activeDay]; let n=0; const pts=[];
-    sorted.forEach(p=>{const isH=p.cat==='hotel';const num=isH?0:++n;pm(p,num,isH?'#a8a69f':color);if(p.lat&&p.lng)pts.push({p,ll:[p.lat,p.lng]});});
-    if(routeVisible) drawGroup(pts,color);
+  }else{
+    const sorted=sortPlaces(dp);const color=DAY_COLORS[activeDay];let n=0;const pts=[];
+    sorted.forEach(p=>{const isH=p.cat==='hotel';const num=isH?0:++n;pm(p,num,isH?'#a8a69f':color,sorted);if(p.lat&&p.lng)pts.push({p,ll:[p.lat,p.lng]});});
+    if(routeVisible)drawGroup(pts,color);
   }
 }
-
-function fitAll(){
-  const pts=places.filter(p=>p.day===activeDay&&p.lat&&p.lng).map(p=>[p.lat,p.lng]);
-  if(pts.length) map.fitBounds(pts,{padding:[50,50]});
-}
+function fitAll(){const pts=places.filter(p=>p.day===activeDay&&p.lat&&p.lng).map(p=>[p.lat,p.lng]);if(pts.length)map.fitBounds(pts,{padding:[50,50]});}
 function toggleRoute(){routeVisible=!routeVisible;document.getElementById('routeBtn').style.color=routeVisible?'var(--accent)':'var(--text3)';renderMarkers();}
-
 map.on('click',e=>{
-  if(!document.getElementById('popupOverlay').classList.contains('show')) return;
+  document.getElementById('searchResults').classList.remove('show');
+  if(!document.getElementById('popupOverlay').classList.contains('show'))return;
   document.getElementById('pLat').value=e.latlng.lat.toFixed(6);
   document.getElementById('pLng').value=e.latlng.lng.toFixed(6);
-  if(tempMarker) map.removeLayer(tempMarker);
+  if(tempMarker)map.removeLayer(tempMarker);
   tempMarker=L.circleMarker([e.latlng.lat,e.latlng.lng],{radius:6,color:'#2a5cff',fillColor:'#2a5cff',fillOpacity:.7}).addTo(map);
 });
-
 function highlightCard(id){
   document.querySelectorAll('.place-card').forEach(c=>c.classList.remove('active'));
-  ['#sidebar','#mobileList'].forEach(sel=>{
-    const el=document.querySelector(`${sel} [data-id="${id}"]`);
-    if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'nearest'});}
-  });
+  ['#sidebar','#mobileList'].forEach(sel=>{const el=document.querySelector(`${sel} [data-id="${id}"]`);if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'nearest'});}});
 }
-
-// ── RENDER ─────────────────────────────────────────────────────
 function doc(tag,cls,txt=''){const el=document.createElement(tag);el.className=cls;if(txt)el.textContent=txt;return el;}
 
 function buildListDOM(container){
@@ -615,52 +448,54 @@ function buildListDOM(container){
   const hd=doc('div','section-hd');
   const title=doc('span','section-title',DAY_NAMES[activeDay]);
   const right=doc('div','hd-right');
-  const mb=doc('button','memo-toggle'+(memoVisible?' on':''),'메모');
+  const db_=doc('button','tool-toggle drag'+(dragMode?' on':''),'⇅ 순서');
+  db_.onclick=()=>{dragMode=!dragMode;document.body.classList.toggle('drag-mode',dragMode);renderAll();};
+  const mb=doc('button','tool-toggle memo'+(memoVisible?' on':''),'메모');
   mb.onclick=()=>{memoVisible=!memoVisible;renderAll();};
-  const ab=doc('button','add-btn','+'); ab.title='장소 추가'; ab.onclick=()=>openPopup();
-  right.appendChild(mb); right.appendChild(ab);
-  hd.appendChild(title); hd.appendChild(right);
-  container.appendChild(hd);
+  const ab=doc('button','add-btn','+');ab.title='장소 추가';ab.onclick=()=>openPopup();
+  right.appendChild(db_);right.appendChild(mb);right.appendChild(ab);
+  hd.appendChild(title);hd.appendChild(right);container.appendChild(hd);
 
+  if(dragMode){
+    const dh=doc('div','drag-hint show');
+    dh.innerHTML='⇅ 드래그 모드: 핸들(☰)을 잡고 위아래로 옮기면 순서가 바뀌어요. 이 모드에선 시간순 자동정렬이 꺼져요.';
+    container.appendChild(dh);
+  }
   if(memoVisible){
     const panel=doc('div','memo-panel show');
-    panel.innerHTML=`<div class="memo-panel-hd">📝 ${DAY_NAMES[activeDay]} 메모</div>
-      <textarea class="memo-textarea" id="memoText" placeholder="숙소 예약번호, 맛집 예약 시간, 준비물 등...">${memos[activeDay]||''}</textarea>
-      <div class="memo-save-row"><span class="memo-saved" id="memoSaved">저장됨 ✓</span><button class="memo-save-btn" onclick="saveMemo()">저장</button></div>`;
+    panel.innerHTML=`<div class="memo-panel-hd">📝 ${DAY_NAMES[activeDay]} 메모</div><textarea class="memo-textarea" id="memoText" placeholder="숙소 예약번호, 맛집 예약 시간, 준비물 등...">${memos[activeDay]||''}</textarea><div class="memo-save-row"><span class="memo-saved" id="memoSaved">저장됨 ✓</span><button class="memo-save-btn" onclick="saveMemo()">저장</button></div>`;
     container.appendChild(panel);
   }
-
   const dp=places.filter(p=>p.day===activeDay);
   if(activeDay===1){
-    const common=dp.filter(p=>p.who==='both').sort((a,b)=>(a.time||'').localeCompare(b.time||''));
-    const mP=dp.filter(p=>p.who==='minseo').sort((a,b)=>(a.time||'').localeCompare(b.time||''));
-    const hP=dp.filter(p=>p.who==='hanbi').sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+    const common=sortPlaces(dp.filter(p=>p.who==='both'));
+    const mP=sortPlaces(dp.filter(p=>p.who==='minseo'));
+    const hP=sortPlaces(dp.filter(p=>p.who==='hanbi'));
     if(common.length){
       container.appendChild(doc('div','split-label','공통 일정'));
-      const list=doc('div','places-list'); let n=0;
-      common.forEach(p=>{const isH=p.cat==='hotel';list.appendChild(makeCard(p,isH?0:++n,DAY_COLORS[1]));});
+      const list=doc('div','places-list');let n=0;
+      common.forEach(p=>{const isH=p.cat==='hotel';list.appendChild(makeCard(p,isH?0:++n,DAY_COLORS[1],false,common));});
       container.appendChild(list);
     }
     if(mP.length||hP.length){
       container.appendChild(doc('div','split-label','개인 일정'));
       const cols=doc('div','split-cols');
-      const colM=doc('div','split-col'); colM.innerHTML='<div class="split-col-hd minseo">민서</div>';
-      const colH=doc('div','split-col'); colH.innerHTML='<div class="split-col-hd hanbi">한비</div>';
+      const colM=doc('div','split-col');colM.innerHTML='<div class="split-col-hd minseo">민서</div>';
+      const colH=doc('div','split-col');colH.innerHTML='<div class="split-col-hd hanbi">한비</div>';
       let mn=0,hn=0;
-      mP.forEach(p=>{const isH=p.cat==='hotel';colM.appendChild(makeCard(p,isH?0:++mn,WHO_COLORS.minseo,true));});
-      hP.forEach(p=>{const isH=p.cat==='hotel';colH.appendChild(makeCard(p,isH?0:++hn,WHO_COLORS.hanbi,true));});
-      cols.appendChild(colM); cols.appendChild(colH); container.appendChild(cols);
+      mP.forEach(p=>{const isH=p.cat==='hotel';colM.appendChild(makeCard(p,isH?0:++mn,WHO_COLORS.minseo,true,mP));});
+      hP.forEach(p=>{const isH=p.cat==='hotel';colH.appendChild(makeCard(p,isH?0:++hn,WHO_COLORS.hanbi,true,hP));});
+      cols.appendChild(colM);cols.appendChild(colH);container.appendChild(cols);
     }
-  } else {
-    const sorted=dp.sort((a,b)=>(a.time||'').localeCompare(b.time||''));
-    const list=doc('div','places-list'); let n=0;
-    sorted.forEach(p=>{const isH=p.cat==='hotel';list.appendChild(makeCard(p,isH?0:++n,DAY_COLORS[p.day]));});
+  }else{
+    const sorted=sortPlaces(dp);
+    const list=doc('div','places-list');let n=0;
+    sorted.forEach(p=>{const isH=p.cat==='hotel';list.appendChild(makeCard(p,isH?0:++n,DAY_COLORS[p.day],false,sorted));});
     container.appendChild(list);
   }
 }
-
-function makeCard(p,num,color,compact=false){
-  const card=doc('div','place-card'); card.dataset.id=p.id;
+function makeCard(p,num,color,compact,grp){
+  const card=doc('div','place-card');card.dataset.id=p.id;
   const wb=p.who!=='both'&&!compact?`<span class="who-badge who-${p.who}">${WHO_LABEL[p.who]}</span>`:'';
   let tr='';
   if(p.transit&&p.transit.mode){
@@ -668,7 +503,9 @@ function makeCard(p,num,color,compact=false){
     const note=t.note&&t.note!==label?` · ${t.note}`:'';
     tr=`<div class="transit-row"><span>${icon}</span><span>${label}${note}</span>${t.min?`<span class="transit-dur">${t.min}</span>`:''}</div>`;
   }
+  const hasGeo=p.lat&&p.lng;
   card.innerHTML=`
+    <div class="drag-handle">☰</div>
     <div class="place-num" style="color:${color};border-color:${color}">${num}</div>
     <div class="place-info">
       <div class="place-name">${p.name}</div>
@@ -676,206 +513,135 @@ function makeCard(p,num,color,compact=false){
       ${wb}${p.memo?`<div class="place-memo-tag">${p.memo}</div>`:''}${tr}
     </div>
     <div class="place-actions">
+      ${hasGeo?`<button class="pa dir-btn" onclick="event.stopPropagation();openDirections(${p.id})" title="길찾기">🧭</button>`:''}
       <button class="pa edit-btn" onclick="event.stopPropagation();openEdit(${p.id})">✎</button>
       <button class="pa" onclick="event.stopPropagation();deletePlace(${p.id})">✕</button>
     </div>`;
-  card.onclick=()=>{if(p.lat&&p.lng){map.setView([p.lat,p.lng],16,{animate:true});markers[p.id]?.openPopup();}highlightCard(p.id);if(window.innerWidth<=700){switchMobileTab('map')};};
+  card.onclick=()=>{if(dragMode)return;if(p.lat&&p.lng){map.setView([p.lat,p.lng],16,{animate:true});markers[p.id]?.openPopup();}highlightCard(p.id);if(window.innerWidth<=700){switchMobileTab('map');}};
+  if(dragMode)attachDrag(card,p);
   return card;
 }
-
-function renderTabs(){
-  const ct=document.getElementById('dayTabs'); ct.innerHTML='';
-  DAY_NAMES.forEach((name,i)=>{
-    const t=doc('div','dtab'+(i===activeDay?' on':''),name);
-    t.onclick=()=>{activeDay=i;saveToFirebase();renderAll();};
-    ct.appendChild(t);
+function openDirections(id){
+  const p=places.find(x=>x.id===id);if(!p||!p.lat||!p.lng)return;
+  const grp=sortPlaces(places.filter(x=>x.day===p.day&&(p.day===1?x.who===p.who:true)));
+  const idx=grp.findIndex(x=>x.id===id);const prev=idx>0?grp[idx-1]:null;
+  window.open(gmapDirUrl(prev,p),'_blank');
+}
+function attachDrag(card,p){
+  const handle=card.querySelector('.drag-handle');if(!handle)return;
+  card.draggable=true;
+  card.addEventListener('dragstart',e=>{draggedId=p.id;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
+  card.addEventListener('dragend',()=>{card.classList.remove('dragging');document.querySelectorAll('.drag-over').forEach(c=>c.classList.remove('drag-over'));});
+  card.addEventListener('dragover',e=>{e.preventDefault();card.classList.add('drag-over');});
+  card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));
+  card.addEventListener('drop',e=>{e.preventDefault();card.classList.remove('drag-over');if(draggedId!==null&&draggedId!==p.id)reorder(draggedId,p.id);});
+  handle.addEventListener('touchstart',e=>{e.preventDefault();draggedId=p.id;card.classList.add('dragging');},{passive:false});
+  handle.addEventListener('touchmove',e=>{
+    e.preventDefault();const t=e.touches[0];const el=document.elementFromPoint(t.clientX,t.clientY);
+    const over=el?el.closest('.place-card'):null;
+    document.querySelectorAll('.drag-over').forEach(c=>c.classList.remove('drag-over'));
+    if(over&&over!==card)over.classList.add('drag-over');
+  },{passive:false});
+  handle.addEventListener('touchend',()=>{
+    card.classList.remove('dragging');const over=document.querySelector('.drag-over');
+    if(over){const tid=parseInt(over.dataset.id);over.classList.remove('drag-over');if(tid&&tid!==p.id)reorder(p.id,tid);}
   });
 }
-
-function renderAll(){
-  renderTabs();
-  buildListDOM(document.getElementById('sidebar'));
-  buildListDOM(document.getElementById('mobileList'));
-  renderMarkers();
-  map.invalidateSize();
+function reorder(fromId,toId){
+  const from=places.find(p=>p.id===fromId),to=places.find(p=>p.id===toId);if(!from||!to)return;
+  const grp=sortPlaces(places.filter(p=>p.day===from.day&&(from.day===1?p.who===from.who:true)));
+  const fromIdx=grp.findIndex(p=>p.id===fromId),toIdx=grp.findIndex(p=>p.id===toId);
+  if(fromIdx<0||toIdx<0)return;
+  grp.splice(toIdx,0,grp.splice(fromIdx,1)[0]);
+  grp.forEach((p,i)=>{const ref=places.find(x=>x.id===p.id);if(ref)ref.order=i;});
+  saveToFirebase();renderAll();
 }
-
-// ── MOBILE TAB SWITCH ──────────────────────────────────────────
+function saveMemo(){
+  const val=document.getElementById('memoText')?.value||'';memos[activeDay]=val;saveToFirebase();
+  const el=document.getElementById('memoSaved');if(el){el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1800);}
+}
+function renderTabs(){
+  const ct=document.getElementById('dayTabs');ct.innerHTML='';
+  DAY_NAMES.forEach((name,i)=>{const t=doc('div','dtab'+(i===activeDay?' on':''),name);t.onclick=()=>{activeDay=i;saveToFirebase();renderAll();};ct.appendChild(t);});
+}
+function renderAll(){renderTabs();buildListDOM(document.getElementById('sidebar'));buildListDOM(document.getElementById('mobileList'));renderMarkers();map.invalidateSize();}
 function switchMobileTab(tab){
   mobileTab=tab;
   document.getElementById('mptList').classList.toggle('on',tab==='list');
   document.getElementById('mptMap').classList.toggle('on',tab==='map');
-  const ml=document.getElementById('mobileList');
-  const mw=document.getElementById('mapWrap');
+  const ml=document.getElementById('mobileList'),mw=document.getElementById('mapWrap');
   if(tab==='list'){ml.style.display='flex';mw.style.display='none';}
-  else if(tab==='map'){ml.style.display='none';mw.style.display='block';setTimeout(()=>map.invalidateSize(),50);}
+  else{ml.style.display='none';mw.style.display='block';setTimeout(()=>map.invalidateSize(),50);}
 }
-
-// ── MEMO ───────────────────────────────────────────────────────
-function saveMemo(){
-  const val=document.getElementById('memoText')?.value||'';
-  memos[activeDay]=val; saveToFirebase();
-  const el=document.getElementById('memoSaved');
-  if(el){el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1800);}
-}
-
-// ── POPUP ──────────────────────────────────────────────────────
 function openPopup(pre={}){
-  editingId=null;
-  document.getElementById('popupTitle').textContent='장소 추가';
-  document.getElementById('pName').value=pre.name||'';
-  document.getElementById('pDay').value=pre.day!==undefined?pre.day:activeDay;
-  document.getElementById('pTime').value=pre.time||'';
-  document.getElementById('pCat').value=pre.cat||'tour';
-  document.getElementById('pWho').value=pre.who||'both';
-  document.getElementById('pMemo').value=pre.memo||'';
-  document.getElementById('pLat').value=pre.lat||'';
-  document.getElementById('pLng').value=pre.lng||'';
-  const t=pre.transit||{};
-  document.getElementById('pTransitMode').value=t.mode||'';
-  document.getElementById('pTransitMin').value=t.min||'';
-  document.getElementById('pTransitNote').value=t.note||'';
+  editingId=null;document.getElementById('popupTitle').textContent='장소 추가';
+  document.getElementById('pName').value=pre.name||'';document.getElementById('pDay').value=pre.day!==undefined?pre.day:activeDay;
+  document.getElementById('pTime').value=pre.time||'';document.getElementById('pCat').value=pre.cat||'tour';
+  document.getElementById('pWho').value=pre.who||'both';document.getElementById('pMemo').value=pre.memo||'';
+  document.getElementById('pLat').value=pre.lat||'';document.getElementById('pLng').value=pre.lng||'';
+  const t=pre.transit||{};document.getElementById('pTransitMode').value=t.mode||'';document.getElementById('pTransitMin').value=t.min||'';document.getElementById('pTransitNote').value=t.note||'';
   document.getElementById('popupOverlay').classList.add('show');
 }
 function openEdit(id){
-  const p=places.find(x=>x.id===id); if(!p) return;
-  editingId=id;
+  const p=places.find(x=>x.id===id);if(!p)return;editingId=id;
   document.getElementById('popupTitle').textContent='장소 수정';
-  document.getElementById('pName').value=p.name;
-  document.getElementById('pDay').value=p.day;
-  document.getElementById('pTime').value=p.time||'';
-  document.getElementById('pCat').value=p.cat;
-  document.getElementById('pWho').value=p.who||'both';
-  document.getElementById('pMemo').value=p.memo||'';
-  document.getElementById('pLat').value=p.lat||'';
-  document.getElementById('pLng').value=p.lng||'';
-  const t=p.transit||{};
-  document.getElementById('pTransitMode').value=t.mode||'';
-  document.getElementById('pTransitMin').value=t.min||'';
-  document.getElementById('pTransitNote').value=t.note||'';
+  document.getElementById('pName').value=p.name;document.getElementById('pDay').value=p.day;
+  document.getElementById('pTime').value=p.time||'';document.getElementById('pCat').value=p.cat;
+  document.getElementById('pWho').value=p.who||'both';document.getElementById('pMemo').value=p.memo||'';
+  document.getElementById('pLat').value=p.lat||'';document.getElementById('pLng').value=p.lng||'';
+  const t=p.transit||{};document.getElementById('pTransitMode').value=t.mode||'';document.getElementById('pTransitMin').value=t.min||'';document.getElementById('pTransitNote').value=t.note||'';
   document.getElementById('popupOverlay').classList.add('show');
 }
-function closePopup(){
-  document.getElementById('popupOverlay').classList.remove('show');
-  if(tempMarker){map.removeLayer(tempMarker);tempMarker=null;}
-  editingId=null;
-}
+function closePopup(){document.getElementById('popupOverlay').classList.remove('show');if(tempMarker){map.removeLayer(tempMarker);tempMarker=null;}editingId=null;}
 function handleOverlayClick(e){if(e.target===e.currentTarget)closePopup();}
 function savePlace(){
-  const name=document.getElementById('pName').value.trim();
-  if(!name){document.getElementById('pName').focus();return;}
+  const name=document.getElementById('pName').value.trim();if(!name){document.getElementById('pName').focus();return;}
   const tMode=document.getElementById('pTransitMode').value;
   const transit=tMode?{mode:tMode,min:document.getElementById('pTransitMin').value.trim(),note:document.getElementById('pTransitNote').value.trim()}:null;
   const obj={name,day:parseInt(document.getElementById('pDay').value),time:document.getElementById('pTime').value.trim(),cat:document.getElementById('pCat').value,who:document.getElementById('pWho').value,memo:document.getElementById('pMemo').value.trim(),lat:parseFloat(document.getElementById('pLat').value)||null,lng:parseFloat(document.getElementById('pLng').value)||null,transit};
   if(editingId){const idx=places.findIndex(p=>p.id===editingId);if(idx>=0)places[idx]={...places[idx],...obj};}
-  else{obj.id=Date.now();places.push(obj);}
-  closePopup(); saveToFirebase(); renderAll();
+  else{obj.id=Date.now();obj.order=999;places.push(obj);}
+  closePopup();saveToFirebase();renderAll();
 }
-function deletePlace(id){
-  if(!confirm('삭제할까요?')) return;
-  places=places.filter(p=>p.id!==id); saveToFirebase(); renderAll();
-}
+function deletePlace(id){if(!confirm('삭제할까요?'))return;places=places.filter(p=>p.id!==id);saveToFirebase();renderAll();}
 
-// ── MAP SEARCH ────────────────────────────────────────────────
-let searchMarker = null;
-let pendingPin = null; // {name, addr, lat, lng}
-
-const geocoder = L.Control.Geocoder.nominatim({geocodingQueryParams:{countrycodes:'jp',limit:6}});
-
-function onSearchInput(){
-  const q = document.getElementById('mapSearchInput').value.trim();
-  if(q.length < 1) { document.getElementById('searchResults').classList.remove('show'); return; }
-}
-
+let searchMarker=null,pendingPin=null;
+const geocoder=L.Control.Geocoder.nominatim({geocodingQueryParams:{countrycodes:'jp',limit:6}});
 function doSearch(){
-  const q = document.getElementById('mapSearchInput').value.trim();
-  if(!q) return;
-  const btn = document.querySelector('.map-search-btn');
-  btn.textContent = '…';
-  geocoder.geocode(q + ' 도쿄', results => {
-    btn.textContent = '↵';
-    const box = document.getElementById('searchResults');
-    box.innerHTML = '';
-    if(!results||!results.length){ box.innerHTML='<div class="search-result-item"><div class="search-result-name">검색 결과 없음</div></div>'; box.classList.add('show'); return; }
-    results.forEach(r => {
-      const item = document.createElement('div');
-      item.className = 'search-result-item';
-      const name = r.name || r.properties?.name || q;
-      const addr = r.properties?.address ? Object.values(r.properties.address).slice(0,3).join(', ') : '';
-      item.innerHTML = `<div class="search-result-name">${name}</div><div class="search-result-addr">${addr}</div>`;
-      item.onclick = () => {
-        box.classList.remove('show');
-        document.getElementById('mapSearchInput').value = name;
-        selectSearchResult(r, name, addr);
-      };
+  const q=document.getElementById('mapSearchInput').value.trim();if(!q)return;
+  const btn=document.querySelector('.map-search-btn');btn.textContent='…';
+  geocoder.geocode(q+' 도쿄',results=>{
+    btn.textContent='↵';const box=document.getElementById('searchResults');box.innerHTML='';
+    if(!results||!results.length){box.innerHTML='<div class="search-result-item"><div class="search-result-name">검색 결과 없음</div></div>';box.classList.add('show');return;}
+    results.forEach(r=>{
+      const item=doc('div','search-result-item');
+      const name=r.name||(r.properties&&r.properties.name)||q;
+      const addr=r.properties&&r.properties.address?Object.values(r.properties.address).slice(0,3).join(', '):'';
+      item.innerHTML=`<div class="search-result-name">${name}</div><div class="search-result-addr">${addr}</div>`;
+      item.onclick=()=>{box.classList.remove('show');document.getElementById('mapSearchInput').value=name;selectSearchResult(r,name,addr);};
       box.appendChild(item);
     });
     box.classList.add('show');
   });
 }
-
-function selectSearchResult(r, name, addr){
-  const lat = r.center.lat, lng = r.center.lng;
-  map.setView([lat, lng], 17, {animate:true});
-  if(searchMarker) map.removeLayer(searchMarker);
-  searchMarker = L.circleMarker([lat,lng],{radius:10,color:'var(--accent)',fillColor:'var(--accent)',fillOpacity:.35,weight:2}).addTo(map);
-
-  pendingPin = {name, addr, lat, lng};
-
-  // Position tooltip near the point
-  const pt = map.latLngToContainerPoint([lat,lng]);
-  const tip = document.getElementById('addPinTooltip');
-  const mapEl = document.getElementById('map');
-  const maxX = mapEl.offsetWidth - 230, maxY = mapEl.offsetHeight - 100;
-  tip.style.left = Math.min(pt.x + 14, maxX) + 'px';
-  tip.style.top  = Math.max(10, Math.min(pt.y - 40, maxY)) + 'px';
-  document.getElementById('addPinName').textContent = name;
-  document.getElementById('addPinAddr').textContent = addr;
+function selectSearchResult(r,name,addr){
+  const lat=r.center.lat,lng=r.center.lng;
+  map.setView([lat,lng],17,{animate:true});
+  if(searchMarker)map.removeLayer(searchMarker);
+  searchMarker=L.circleMarker([lat,lng],{radius:10,color:'#2a5cff',fillColor:'#2a5cff',fillOpacity:.35,weight:2}).addTo(map);
+  pendingPin={name,addr,lat,lng};
+  const pt=map.latLngToContainerPoint([lat,lng]);
+  const tip=document.getElementById('addPinTooltip'),mapEl=document.getElementById('map');
+  tip.style.left=Math.min(pt.x+14,mapEl.offsetWidth-230)+'px';
+  tip.style.top=Math.max(10,Math.min(pt.y-40,mapEl.offsetHeight-100))+'px';
+  document.getElementById('addPinName').textContent=name;
+  document.getElementById('addPinAddr').textContent=addr;
   tip.classList.add('show');
 }
+function closeAddPin(){document.getElementById('addPinTooltip').classList.remove('show');if(searchMarker){map.removeLayer(searchMarker);searchMarker=null;}pendingPin=null;}
+function addPinToSchedule(){if(!pendingPin)return;const pin=pendingPin;closeAddPin();document.getElementById('searchResults').classList.remove('show');openPopup({name:pin.name,lat:pin.lat,lng:pin.lng,memo:pin.addr});}
+document.addEventListener('click',e=>{const wrap=document.getElementById('mapSearchWrap');if(wrap&&!wrap.contains(e.target))document.getElementById('searchResults').classList.remove('show');});
 
-function closeAddPin(){
-  document.getElementById('addPinTooltip').classList.remove('show');
-  if(searchMarker){map.removeLayer(searchMarker);searchMarker=null;}
-  pendingPin=null;
-}
-
-function addPinToSchedule(){
-  if(!pendingPin) return;
-  closeAddPin();
-  document.getElementById('searchResults').classList.remove('show');
-  // Pre-fill popup with search result
-  openPopup({
-    name: pendingPin.name,
-    lat: pendingPin.lat,
-    lng: pendingPin.lng,
-    memo: pendingPin.addr,
-  });
-}
-
-// Close search results on map click
-map.on('click', () => {
-  document.getElementById('searchResults').classList.remove('show');
-});
-
-// Close on outside click
-document.addEventListener('click', e => {
-  const wrap = document.getElementById('mapSearchWrap');
-  if(wrap && !wrap.contains(e.target)) document.getElementById('searchResults').classList.remove('show');
-});
-
-// ── RESET DATA ────────────────────────────────────────────────
-function resetData(){
-  if(!confirm('일정을 기본값으로 초기화할까요? 수정한 내용이 모두 사라집니다.')) return;
-  places = JSON.parse(JSON.stringify(DEFAULT_PLACES));
-  memos = {};
-  activeDay = 0;
-  saveToFirebase();
-  renderAll();
-  setTimeout(fitAll, 300);
-}
-
-// ── RESIZE (desktop only) ─────────────────────────────────────
 (function(){
   const handle=document.getElementById('resizeHandle'),sb=document.getElementById('sidebar');
   let drag=false,sx=0,sw=0;
@@ -884,7 +650,6 @@ function resetData(){
   document.addEventListener('mouseup',()=>{if(!drag)return;drag=false;handle.classList.remove('dragging');document.body.style.cursor='';document.body.style.userSelect='';});
 })();
 
-// ── INIT ──────────────────────────────────────────────────────
 setTimeout(fitAll,600);
 </script>
 </body>
